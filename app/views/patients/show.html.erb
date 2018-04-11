@@ -1,0 +1,181 @@
+<div class="added-successfully">
+  <i class="fa fa-check-circle"></i> <span>Item Added</span>
+</div>
+
+<div class="grid-x grid-margin-x">
+  <div class="cell small-12 medium-3">
+    <table class="f14">
+
+    <tr>
+    <td>
+      <strong>Name:</strong>
+      <%= @patient.first_name %> <%= @patient.last_name %>
+      <br /> <%= link_to edit_patient_path(@patient), class: "f12" do %><i class="fa fa-pencil primary-color"></i> EDIT<% end %>
+    </td>
+    </tr>
+    <tr>
+    <td>
+      <strong>Room number:</strong>
+      <%= @patient.room_number %>
+    </td>
+    </tr>
+    <tr>
+    <td>
+      <strong>Allergies:</strong>
+      <%= @patient.allergies %>
+    </td>
+    </tr>
+    <tr>
+    <td>
+      <strong>Diet type:</strong>
+      <%= @patient.diet_type %>
+    </td>
+    </tr>
+    <tr>
+    <td>
+      <strong>Diet texture:</strong>
+      <%= @patient.diet_texture %>
+    </td>
+    </tr>
+    <tr>
+    <td>
+      <strong>Fluid consistency:</strong>
+      <%= @patient.fluid_consistency %>
+    </td>
+    </tr>
+    <tr>
+    <td>
+      <strong>Fluid restriction:</strong>
+      <%= @patient.fluid_restriction %>
+    </td>
+    </tr>
+    <tr>
+    <td>
+      <strong>Likes:</strong>
+      <%= @patient.likes %>
+    </td>
+    </tr>
+    <tr>
+    <td>
+      <strong>Dislikes:</strong>
+      <%= @patient.dislikes %>
+    </td>
+    </tr>
+    <tr>
+    <td>
+      <strong>Extra information:</strong>
+      <%= @patient.extra_information %>
+    </td>
+    </tr>
+  </table>
+  </div>
+  <div class="cell small-12 medium-6">
+  <h1>Build a daily menu choice form for <%= @patient.first_name %> <%= @patient.last_name %></h1>
+  <% if params.key?(:filter_date) %>
+  <% @filtered_date = (params[:filter_date].to_date).strftime("%Y-%m-%d") %>
+  <% @filter_date = params[:filter_date].to_date %>
+  <div class="date-subtitle">Currently building a daily menu choice form for <br /><span><%= @filter_date.strftime("%A %d/%b/%Y")%></span></div>
+ 
+  <% else %>
+
+  <% @filtered_date = (Time.now + 1.day).strftime("%Y-%m-%d") %>
+  <div class="date-subtitle">Currently building a daily menu choice form for<br /><span> Tomorrow <%= (Time.now + 1.day ).strftime("%A %d/%b/%Y")%></span></div>
+
+   <% end %>
+
+  <div class="date-form-container"> 
+   <p>If you would like to build adaily choice form for a specific date, please enter the date using the form below.</p>
+  <!-- Date form -->
+  <%= form_tag(patient_path(@patient), {:method => :get}) do %>
+  <div class="grid-x grid-margin-x">
+    <div class="cell auto">
+      <%= date_field_tag :filter_date %>
+    </div>
+    <div class="cell shrink text-right">
+      <%= submit_tag "Change Date", class: "button alert" %>
+    </div>
+  </div>
+  </div>  
+  
+  
+  <% end %>
+<% @order = Order.where(delivery_date: @filtered_date).where(patient_id: @patient.id).last %>
+  <% if @order.blank? %>
+  <ul class="accordion" data-accordion data-multi-expand="true"  data-allow-all-closed="true">
+  <% @meal_options.group_by(&:meal_category).each do |meal_category, meal_option| %>
+  <li class="accordion-item" data-accordion-item>
+    <!-- Accordion tab title -->
+    <a href="#" class="accordion-title">Add <%= meal_category.title %> Options</a>
+
+        
+    <div class="accordion-content" data-tab-content>
+      <div class="grid-x grid-margin-x">
+        <% meal_option.each do |m| %>
+          <div class="cell small-6 medium-4 meal-box" data-open="meal_modal_<%= m.id %>">
+            <%= m.title %>
+          </div>
+
+          <div class="reveal" id="meal_modal_<%= m.id %>" data-reveal>
+            
+            <% @tomorrow_date = @filtered_date %>
+            <% @meals = Meal.where('available_date = ?', "#{@tomorrow_date}").where(meal_option_id: m.id).all %>
+
+            <div class="grid-x grid-margin-x">
+              <% @meals.each do |meal| %>
+
+                <div class="cell small-6 medium-4 text-center" style="border:4px solid #e5e5e5; background-color: #f5f5f5; padding: 20px 10px;">
+                <h2><%= meal.title %></h2>
+                  <%= form_for @patient_meal, :remote => true, :url => patient_patient_meal_path(@patient) do |f| %>
+                    <%= f.hidden_field :meal_id, value: meal.id %>
+                    <%= f.hidden_field :patient_id, value: @patient.id %>
+                    <%= f.hidden_field :meal_option_id, value: meal.meal_option_id %>
+                    <%= f.hidden_field :delivery_date, value: @filtered_date %>
+                    <%= button_tag type: 'submit', class: "button success expanded large", id: "patient_meal", style:"margin-top: 20px;" do %>
+                            <i class="fa fa-plus-circle" aria-hidden="true"></i> ADD
+                        <% end %>
+                  <% end %>
+                </div>
+
+                
+
+              <% end %>
+            </div>
+            
+            
+            <button class="close-button" data-close aria-label="Close modal" type="button">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+                
+        <% end %>
+      </div>
+    </div>
+  </li>
+  <% end %>
+  </ul>
+  <% end %>
+  </div>
+
+  <div class="cell small-12 medium-3">
+      <h2><i class="fa fa-cart-plus"></i> Your order</h2>
+      <div class="f14" style="line-height:16px; padding: 10px; background-color: #f5f5f5; color: #5b696d;">Build a daily choice menu by clicking the blue buttons and selecting the patients meal preferences. Click the "Build Order" button below to submit your order to the kitchen.</div>
+      <% @patient_meal_items = PatientMeal.where(patient_id: @patient.id).where(delivery_date: @filtered_date).all %>
+        <div class="tester">
+        <%= render 'patients/meal_item', patient_meal_item: @patient_meal_items  %>
+        </div>
+
+        <br />
+        
+        <% if @order.blank? %>
+        <%= link_to "BUILD ORDER", patient_build_order_path(@patient, :filtered_date => @filtered_date, :patient => @patient.id), class: "button large success" %>
+        <% else %>
+        <div class="order-placed-container"><i class="fa fa-check-circle white-color"></i> This order has been placed</div>
+        <% end %>
+        
+  </div>
+
+</div>
+
+
+
+

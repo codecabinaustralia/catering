@@ -1,0 +1,42 @@
+<%= form_for(@meal) do |f| %>
+  <% if @meal.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@meal.errors.count, "error") %> prohibited this meal from being saved:</h2>
+
+      <ul>
+      <% @meal.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+
+  <% @random_string = SecureRandom.urlsafe_base64(5) %>
+  <div class="field">
+    <%= f.label :relationship_code %>
+    <%= f.hidden_field :relationship_code, value: @random_string %>
+  </div>
+
+
+  <div class="field">
+    <%= f.hidden_field :meal_option_id, value:  meal_option.id %>
+  </div>
+
+  <div class="field">
+    <%= f.hidden_field :preloaded_meal_id, value:  0 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :notes %>
+    <%= f.text_area :notes %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

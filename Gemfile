@@ -19,6 +19,12 @@ gem 'devise'
 gem 'rolify'
 gem 'foundation-rails'
 gem 'autoprefixer-rails'
+gem 'ice_cube'
+gem 'recurring_select'
+gem "font-awesome-rails"
+gem 'chart-js-rails'
+gem 'jquery-minicolors-rails'
+gem 'chosen-rails'
 
 group :development, :test do
   gem 'byebug', platform: :mri

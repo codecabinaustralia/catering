@@ -1,0 +1,22 @@
+<!-- MEAL OPTIONS BODY OF CAL -->
+	<% if meal_option.color.present? %>
+	<div class="mo-meal-option" data-open="meal_option_modal_<%= meal_option.id %>_<%= @the_date.strftime("%d%m%y") %>" id="mo-meal-option-<%= meal_option.id %>" style="background-color: <%= meal_option.color %>; ">
+	<% else %>
+	<div class="mo-meal-option" data-open="meal_option_modal_<%= meal_option.id %>_<%= @the_date.strftime("%d%m%y") %>" id="mo-meal-option-<%= meal_option.id %>" style="background-color: #313e4c;">
+	<% end %>
+
+	<% if @meals.blank? %>
+		<div class="mo-meal-option-txt"><%= meal_option.title %></div>
+		
+	<% else %>
+		<div style="color: white; padding:5px;">
+		<%= meal_option.title %>
+		</div>
+		
+			<div class="tester">
+			<%= render 'meal_item', meals: @meals %>
+			</div>	
+		
+	<% end %>
+
+	</div>

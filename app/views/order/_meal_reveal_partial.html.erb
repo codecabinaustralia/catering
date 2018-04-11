@@ -1,0 +1,30 @@
+<!-- REVEAL MODAL -->
+	<div class="reveal" id="meal_option_modal_<%= meal_option.id %>_<%= @the_date.strftime("%d%m%y") %>" data-reveal>
+
+		<div class="nav-reveal">
+		<% if @meals.blank? %>
+			<h3>No Meals Added Yet for <%= meal_option.title %></h3>
+		<% else %>
+			<h3>Current meals for <%= meal_option.title %> on the <%= @the_date.strftime("%d/%m/%y") %></h3>
+				<ul>
+				<% @meals.each do |meal| %>
+					<li style="padding: 20px 20px;">
+						<%= meal.title %> 
+						<%= link_to bulk_delete_path(:meal => meal.id, :current_time => @the_date) do %>
+							<i class="fa fa-times alert-color float-right" style="margin-top:5px;"></i>
+						<% end %>
+					</li>
+				<% end %>
+				</ul>
+				
+					
+		<% end %>
+		</div>
+
+	  <!-- Show container with preloaded meals -->
+	  <div id="preloaded_<%= meal_option.id %>_<%= @the_date.strftime("%d%m%y") %>">
+	  	<%= render 'meals/menu_preloaded_form', meal_option: meal_option, the_date: @the_date %>
+	  </div>
+
+	  <%= render 'order/close_modal' %>
+	</div>

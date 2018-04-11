@@ -1,0 +1,7 @@
+<% @meal_options.each do |meal_option| %>
+	<% @meals = Meal.where(meal_option_id: meal_option.id).where(available_date: @the_date).all %>
+
+	<%= render 'meal_option_partial', meals: @meals, meal_option: meal_option %>
+	<%= render 'meal_reveal_partial', meals: @meals, meal_option: meal_option %>
+
+<% end %>

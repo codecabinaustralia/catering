@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  first_name: MyString
+  last_name: MyString
+  room_number: MyString
+  allergies: MyText
+  diet_type: MyText
+  diet_texture: MyText
+  fluid_consistency: MyText
+  fluid_restriction: MyText
+  likes: MyText
+  dislikes: MyText
+  extra_information: MyText
+
+two:
+  first_name: MyString
+  last_name: MyString
+  room_number: MyString
+  allergies: MyText
+  diet_type: MyText
+  diet_texture: MyText
+  fluid_consistency: MyText
+  fluid_restriction: MyText
+  likes: MyText
+  dislikes: MyText
+  extra_information: MyText

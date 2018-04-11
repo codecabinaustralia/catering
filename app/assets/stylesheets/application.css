@@ -12,6 +12,10 @@
  *
  *= require_tree .
  *= require_self
+ *= require font-awesome
  *= require foundation_and_overrides
-
+ *= require recurring_select
+ *= require jquery-mobile-rs
+ *= require jquery.minicolors
+ *= require chosen
  */

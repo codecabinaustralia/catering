@@ -1,0 +1,41 @@
+
+<%= form_for(@meal) do |f| %>
+  <% if @meal.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@meal.errors.count, "error") %> prohibited this meal from being saved:</h2>
+
+      <ul>
+      <% @meal.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.collection_select(:preloaded_meal_id, PreloadedMeal.all, :id, :title, prompt: true, class: 'chosen-select') %>
+  </div>
+
+ 
+  <% @random_string = SecureRandom.urlsafe_base64(5) %>
+  <div class="field">
+    <%= f.hidden_field :relationship_code, value: @random_string %>
+  </div>
+
+  <div class="field">
+    <%= f.hidden_field :available_date, value: @the_date.to_date %>
+  </div>
+
+  <div class="field">
+    <%= f.hidden_field :the_date, value: @the_date.to_date %>
+  </div>
+
+  <div class="field">
+    <%= f.hidden_field :meal_option_id, value:  meal_option.id %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Add Preloaded Meal", class: "button primary" %>
+  </div>
+<% end %>
+

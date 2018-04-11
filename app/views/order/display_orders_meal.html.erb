@@ -1,0 +1,132 @@
+<h1>People who have ordered <%= @meal.title.pluralize(2) %></h1>
+
+<% if @meal.meal_option.title != "Drink" %>
+	<div><h3><i class="fa fa-info secondary-color"></i> Diet Textures</h3></div>
+	<div class="grid-x grid-margin-x order-display-dietry-container">
+	
+	<% @patients.group_by(&:diet_texture).each do |diet, patient| %>
+		<% patient.uniq(&:diet_texture).each do |m| %>
+			<div class="cell small-6 medium-3 order-graph-stat-container" data-open="dietry_modal_<%= m.id %>">
+				<div class="order-graph-stat"><%= patient.count %></div>
+				<canvas id="diet_texture_<%= m.id %>"></canvas>
+				<div class="graph-label"><%= m.diet_texture %></div>
+				<script>
+				var ctx_<%= m.id %> = document.getElementById('diet_texture_<%= m.id %>').getContext('2d');
+					var clientsChart = new Chart(ctx_<%= m.id %>, {
+				    type: 'doughnut', 
+				    data: {
+				    	labels: ["<%= m.diet_texture %>", "Total Patients"],
+				    	datasets: [{
+				    		data: [
+				    			<%= patient.count %>,
+				    			<%= @patients.count / 2 %>
+				    		],
+				    		backgroundColor: [
+				    			'#F03C40',
+				    			'#e5e5e5'
+				    		]
+				    	}]
+				    },
+				    options: {
+				    	tooltips: {
+				    		enabled: false,
+				    	},
+				    	legend: {
+				    	            display: false,
+				    	        }
+				    }
+				});
+				</script>
+			</div>
+
+			<div class="reveal" id="dietry_modal_<%= m.id %>" data-reveal>
+			  <% @actual_patients = @patients.uniq(&:patient_id).where(diet_texture: m.diet_texture).all %>
+			  <% @actual_patients.each do |ap| %>
+			  	<%= ap.patient.first_name %> <%= ap.patient.last_name %><br />
+			  <% end %>
+			  <button class="close-button" data-close aria-label="Close modal" type="button">
+			    <span aria-hidden="true">&times;</span>
+			  </button>
+			</div>
+
+		<% end %>
+	<% end %>
+	</div>
+<% else %>
+
+	<h3>Fluid Consistency</h3>
+	<% @patients.group_by(&:fluid_consistency).each do |diet, patient| %>
+		<% patient.uniq(&:fluid_consistency).each do |m| %>
+		<div data-open="dietry_modal_<%= m.id %>">
+			<%= m.fluid_consistency %> <%= patient.count %>
+		</div>
+
+		<div class="reveal" id="dietry_modal_<%= m.id %>" data-reveal>
+		  <% @actual_patients = @patients.uniq(&:patient_id).where(fluid_consistency: m.fluid_consistency).all %>
+		  <% @actual_patients.each do |ap| %>
+		  	<%= ap.patient.first_name %> <%= ap.patient.last_name %><br />
+		  <% end %>
+		  <button class="close-button" data-close aria-label="Close modal" type="button">
+		    <span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+
+		<% end %>
+	<% end %>
+<% end %>
+<table>
+	<thead>
+		<th>Patient Name</th>
+		<th>Room Number</th>
+		<th>Site</th>
+		<th>Ward</th>
+		<th>Status</th>
+		<th>Diet Textures</th>
+		<th>Fluid Consistency</th>
+		<th>Menu</th>
+		<th>Notes</th>
+	</thead>
+	<% @patients.each do |patient| %>
+	<tr>
+		<td>
+			<%= link_to patient_path(patient.patient.id) do %>
+			<%= patient.patient.first_name %> <%= patient.patient.last_name %>
+			<% end %>
+		</td>
+		<td>
+			<%= patient.patient.room_number %>
+		</td>
+		<td>
+			<%= patient.patient.ward.site.name %>
+		</td>
+		<td>
+			<%= patient.patient.ward.name %>
+		</td>
+		<td class="text-center f36">
+			<% @order = Order.where(delivery_date: @filtered_date).where(patient_id: patient.patient).last %>
+			<% if @order.blank? %>
+			<i class="fa fa-cross-circle secondary-color"></i>
+			<% else %>
+			<i class="fa fa-check-circle success-color"></i>
+			<% end %>
+		</td>
+		<td>
+			<%= patient.patient.diet_texture %>
+		</td>
+		<td>
+			<%= patient.patient.fluid_consistency %>
+		</td>
+		<td>
+
+			<%= link_to root_path, class: "button primary" do  %>
+					<i class="fa fa-book"></i>
+			<% end %>
+		</td>
+		<td>
+			<%= link_to "Notes", root_path, class: "button primary" %>
+		</td>
+	</tr>
+	<% end %>
+</table>
+
+

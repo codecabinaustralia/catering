@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Preloaded Meals</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Ingredients</th>
+      <th>Nutritional info</th>
+      <th>Notes</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @preloaded_meals.each do |preloaded_meal| %>
+      <tr>
+        <td><%= preloaded_meal.title %></td>
+        <td><%= preloaded_meal.ingredients %></td>
+        <td><%= preloaded_meal.nutritional_info %></td>
+        <td><%= preloaded_meal.notes %></td>
+        <td><%= link_to 'Show', preloaded_meal %></td>
+        <td><%= link_to 'Edit', edit_preloaded_meal_path(preloaded_meal) %></td>
+        <td><%= link_to 'Destroy', preloaded_meal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Preloaded Meal', new_preloaded_meal_path %>

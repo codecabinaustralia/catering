@@ -13,7 +13,14 @@
 
   <body>
     <%= render 'layouts/topbar'%>
-    <%= yield %>
+    <div class="grid-container">  
+        <div class="grid-x">
+          <div class="small-12 white-canvas">
+            <%= yield %>
+          </div>
+        </div>  
+    </div>  
+    
 
   </body>
 </html>

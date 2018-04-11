@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @preloaded_meal.title %>
+</p>
+
+<p>
+  <strong>Ingredients:</strong>
+  <%= @preloaded_meal.ingredients %>
+</p>
+
+<p>
+  <strong>Nutritional info:</strong>
+  <%= @preloaded_meal.nutritional_info %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @preloaded_meal.notes %>
+</p>
+
+<%= link_to 'Edit', edit_preloaded_meal_path(@preloaded_meal) %> |
+<%= link_to 'Back', preloaded_meals_path %>

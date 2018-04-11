@@ -1,4 +1,33 @@
 @import 'foundation_and_overrides';
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800');
+
+/* Colors */
+
+.primary-color{
+	color: $primary-color;
+}
+
+.alert-color{
+	color: $alert-color;
+}
+.primary-color-bg{
+	background-color: $primary-color;
+}
+.secondary-color{
+	color: $secondary-color;
+}
+.success-color{
+	color: $success-color;
+}
+
+.success-color-bg{
+	background-color: $success-color; 
+}
+
+.white-color{
+	color: #fff;
+}
+
 
 /* Font Sizes */
 
@@ -65,3 +94,236 @@
 .f100{
 	font-size: 100px;
 }
+
+/* top-bar */
+.top-bar{
+	-webkit-box-shadow: 0px 10px 17px 0px rgba(0,0,0,0.2);
+	-moz-box-shadow: 0px 10px 17px 0px rgba(0,0,0,0.2);
+	box-shadow: 0px 10px 17px 0px rgba(0,0,0,0.2);
+}
+
+/* buttons */
+.button{
+	border-radius: 5px !important;
+	color: $white !important;
+}
+
+/* Hacks for foundation*/
+body.is-reveal-open, body>accordion-item.is-active {
+overflow: visible !important;
+}
+
+
+/* containers */
+
+body{
+	background-image: url('http://res.cloudinary.com/theblackandwhites/image/upload/v1522268481/salvation_army/image.jpg') !important;
+	background-position:center;
+	background-size: 100% !important;
+	background-color: $light-gray;
+	font-family: 'Open Sans', sans-serif !important;
+}
+
+.white-canvas{
+	margin-top: 50px;
+	background-color: $white;
+	padding: 20px;
+	border: #e5e5e5 5px solid;
+}
+
+
+/* Nav Reveals */
+.nav-reveal ul{
+	list-style:none;
+	margin-left: 0;
+}
+
+.nav-reveal li{
+	list-style:none;
+	margin-left: 0;
+	font-size: 18px;
+	padding: 20px 0;
+	background-color: #f5f5f5;
+	border-bottom: 1px solid #e5e5e5;
+	transition: all ease .2s;
+}
+
+.nav-reveal li.logout-link{
+	background-color: $secondary-color;
+	border-bottom: none !important;
+}
+
+.nav-reveal li.logout-link a{
+	color: $white;
+}
+
+.nav-reveal li:hover{
+	background-color: #2a8096 !important;
+	color: #fff !important;
+}
+
+/* Graphs */
+
+.order-graph-stat-container {
+    position: relative;
+    cursor: hand;
+    cursor: pointer;
+    background-color: $white;
+    border-radius: 10px;
+    transition: all ease 1s;
+}
+.order-graph-stat-container:hover {
+    cursor: hand;
+    cursor: pointer;
+    background-color: #f5f5f5;
+}
+
+.order-graph-stat{
+	font-size: 28px;
+	font-weight: 600;
+	width: 100%;
+	text-align:center;
+	color: #F03C40;
+	margin-top: 40px;
+	position: absolute;
+}
+
+.graph-label{
+	width: 100%;
+	text-align:center;
+	font-weight: 600;
+	font-size: 14px;
+	color: #F03C40;
+}
+
+/* Order Display */
+.order-display-dietry-container{
+		margin-bottom: 40px;
+}
+
+.meal-box{
+	padding: 40px 0;
+	text-align: center;
+	background-color: #e5e5e5;
+	transition: all ease 0.2s;
+}
+
+.meal-box:hover{
+	background-color: #2a8096;
+	color: $white;
+	cursor: hand;
+	cursor: pointer;
+}
+
+.accordion-title{
+	font-size: 16px !important;
+}
+
+.accordion-title:hover, .accordion-title:focus {
+    color: #fff !important;
+}
+
+/* Patient Page */
+
+.date-subtitle{
+	width: 100%;
+	background-color: $primary-color;
+	padding: 10px;
+	color: $white;
+	margin-top: 10px;
+
+}
+
+.date-subtitle span{
+	color:#449eb5;
+}
+
+.date-form-container{
+	background-color: #f5f5f5;
+	-webkit-border-bottom-right-radius: 10px;
+	-webkit-border-bottom-left-radius: 10px;
+	-moz-border-radius-bottomright: 10px;
+	-moz-border-radius-bottomleft: 10px;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	padding: 20px;
+	font-size:14px;
+}
+
+.meal-item-button{
+	text-align:center;
+	background-color: $primary-color;
+}
+
+.meal-item-button input[type="submit"]{
+	width: 100%;
+	height: 100%;
+}
+
+.order-placed-container{
+	width:100%;
+	padding: 5px 0;
+	text-align:center;
+	background-color: $success-color;
+	color: $white;
+}
+
+.meal-item-order-form{
+	width: 100%;
+	border-bottom: 1px solid $light-gray;
+	padding: 10px 0;
+	font-weight: 700;
+	color: #449eb5;
+}
+
+.meal-item-order-form span{
+	color: #5b696d;
+	font-weight: 600;
+}
+
+.added-successfully{
+	background-color: $success-color;
+	text-align:center;
+	color: white;
+	top: 0;
+	left: 0;
+	width: 300px;
+	position: absolute;
+	z-index: 9999999999;
+	font-size: 30px;
+	width: 100%;
+	display: none;
+
+}
+
+.added-successfully span{
+	font-size: 20px;
+
+}
+
+/* Overview */
+
+.mo-meal-option{
+	font-size: 14px;
+	margin-top:3px;
+}
+
+.mo-meal-option-txt{
+	color: white;
+	padding:5px;
+}
+
+.mo-meal-option-txt-child{
+	padding:5px;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+}
+
+.mo-meal-option:hover {
+	filter: brightness(85%);
+	cursor: hand;
+	cursor: pointer;
+}
+
+/* Settings */

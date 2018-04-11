@@ -1,0 +1,3 @@
+$(".added-successfully").slideDown().delay( 800 ).fadeOut( 400 );
+
+$('.tester').html("<%= escape_javascript render(:partial => 'meal_item', :locals => { :p => @patient_meal_items }) %>");

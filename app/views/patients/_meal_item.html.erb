@@ -1,0 +1,5 @@
+<% @patient_meal_items.each do |patient_meal_item| %>
+<div class="meal-item-order-form">  
+  <%= patient_meal_item.meal.title %> <span>- <%= patient_meal_item.meal.meal_option.meal_category.title %></span>   
+</div>
+<% end %>

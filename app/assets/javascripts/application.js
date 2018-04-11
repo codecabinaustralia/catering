@@ -12,12 +12,25 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.minicolors
 //= require foundation
 //= require turbolinks
+//= require recurring_select
+//= require jquery-mobile-rs
+//= require Chart.min
+//= require chosen-jquery
 //= require_tree .
 
 $(document).on('turbolinks:load', function() {
 	$(function(){ $(document).foundation(); 
+		$('input[type=text].color_wheel').minicolors();
+
+		$('#meal_preloaded_meal_id').chosen({
+		    allow_single_deselect: true,
+		    no_results_text: 'No results matched',
+		    width: '200px'
+		  });   
+
 	});
 	
 });

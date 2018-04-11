@@ -1,0 +1,106 @@
+<div class="added-successfully">
+  <i class="fa fa-check-circle"></i> <span>Item Added</span>
+</div>
+
+<div class="grid-x">
+	<div class="cell small-12">
+		<%= link_to "NEXT", menu_overview_path(:current_time => (@current_time + 7.day).strftime("%Y-%m-%d").to_s.strip), class: "small button primary float-right", style: "margin-left: 10px;" %>
+		<%= link_to "PREV", menu_overview_path(:current_time => (@current_time - 7.day).strftime("%Y-%m-%d").to_s.strip), class: "small button primary float-right"%>
+	</div>
+</div>
+
+
+<table class="unstriped">
+	<thead style="background-color: #232d38; color: #fff; font-size: 14px;">
+		<th></th>
+		<th class="text-center">
+		<%= @current_time.strftime("%A")%><br />
+			<span>
+				<%= @current_time.strftime("%b")%>
+				<%= @current_time.strftime('%d').to_i.ordinalize %>
+			</span>
+		</th>
+		<th class="text-center">
+		<%= (@current_time + 1.day).strftime("%A")%><br />
+			<span>
+				<%= (@current_time + 1.day).strftime("%b")%>
+				<%= (@current_time + 1.day).strftime('%d').to_i.ordinalize %>
+			</span>
+		</th>
+		<th class="text-center">
+		<%= (@current_time + 2.day).strftime("%A")%><br />
+			<span>
+				<%= (@current_time + 2.day).strftime("%b")%>
+				<%= (@current_time + 2.day).strftime('%d').to_i.ordinalize %>
+			</span>
+		</th>
+		<th class="text-center">
+		<%= (@current_time + 3.day).strftime("%A")%><br />
+			<span>
+				<%= (@current_time + 3.day).strftime("%b")%>
+				<%= (@current_time + 3.day).strftime('%d').to_i.ordinalize %>
+			</span>
+		</th>
+		<th class="text-center">
+		<%= (@current_time + 4.day).strftime("%A")%><br />
+			<span>
+				<%= (@current_time + 4.day).strftime("%b")%>
+				<%= (@current_time + 4.day).strftime('%d').to_i.ordinalize %>
+			</span>
+		</th>
+		<th class="text-center">
+		<%= (@current_time + 5.day).strftime("%A")%><br />
+			<span>
+				<%= (@current_time + 5.day).strftime("%b")%>
+				<%= (@current_time + 5.day).strftime('%d').to_i.ordinalize %>
+			</span>
+		</th>
+		<th class="text-center">
+		<%= (@current_time + 1.day).strftime("%A")%><br />
+			<span>
+				<%= (@current_time + 6.day).strftime("%b")%>
+				<%= (@current_time + 6.day).strftime('%d').to_i.ordinalize %>
+			</span>
+		</th>
+
+		<tbody>
+			<% @meal_categories.each do |meal_category| %>
+			<tr>
+				<td class="white-color text-center" style="background-color: #3c454f;"><%= meal_category.title %></td>
+				<% @meal_options = MealOption.where(meal_category_id: meal_category.id).all %>
+				<td>
+					<% @the_date = @current_time %>
+					<%= render 'meal_overview_partial', the_date: @the_date, meal_options: @meal_options %>
+				</td>
+
+				<td>
+					<% @the_date = @current_time + 1.day %>
+					<%= render 'meal_overview_partial', the_date: @the_date, meal_options: @meal_options %>
+				</td>
+				<td>
+					<% @the_date = @current_time + 2.day %>
+					<%= render 'meal_overview_partial', the_date: @the_date, meal_options: @meal_options %>
+				</td>
+				<td>
+					<% @the_date = @current_time + 3.day %>
+					<%= render 'meal_overview_partial', the_date: @the_date, meal_options: @meal_options %>
+				</td>
+				<td>
+					<% @the_date = @current_time + 4.day%>
+					<%= render 'meal_overview_partial', the_date: @the_date, meal_options: @meal_options %>
+				</td>
+				<td>
+					<% @the_date = @current_time + 5.day %>
+					<%= render 'meal_overview_partial', the_date: @the_date, meal_options: @meal_options %>
+				</td>
+				<td>
+					<% @the_date = @current_time + 6.day %>
+					<%= render 'meal_overview_partial', the_date: @the_date, meal_options: @meal_options %>
+				</td>
+			</tr>
+			<% end %>
+		</tbody>
+
+	</thead>
+</table>
+

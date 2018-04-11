@@ -1,0 +1,139 @@
+<div class="grid-x">
+	<div class="cell small-12">
+		<div class="order-search-box">
+			<div class="grid-x grid-margin-x">
+				<div class="cell small-12 medium-4">
+					<%= form_tag(display_orders_path, {:method => :get}) do %>
+					<div class="grid-x grid-margin-x">
+					  <div class="cell auto">
+					    <%= date_field_tag :filtered_date %>
+					  </div>
+					  <div class="cell shrink text-right">
+					    <%= submit_tag "Change Date", class: "button alert" %>
+					  </div>
+					</div>  
+					<% end %>
+				</div>
+				<div class="cell auto">
+				<%= form_for(display_orders_path, {:method => :get, remote: true}) do |f| %>
+				<div class="grid-x grid-margin-x">
+				<div class="cell small-12 medium-4">
+				
+					<%= f.collection_select :site_id,
+					           Site.order(:name), :id, :name,
+					           {:prompt => "All Sites"} %>
+				
+				</div>
+				<div class="cell small-12 medium-4">
+						<%= f.grouped_collection_select :ward_id,
+					           Site.order(:name), :wards, :name, :id, :name,
+					           {:prompt => "All Wards"} %>
+				</div>
+				</div>
+				<% end %>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</div>
+
+<ul class="accordion" data-accordion data-multi-expand="true"  data-allow-all-closed="true">
+<% @meal_options.group_by(&:meal_category).each do |meal_category, meal_option| %>
+<li class="accordion-item" data-accordion-item>
+	<!-- Accordion tab title -->
+	<a href="#" class="accordion-title">View <%= meal_category.title %> Orders</a>
+
+		  
+	<div class="accordion-content" data-tab-content>
+		<div class="grid-x grid-margin-x">
+			<% meal_option.each do |m| %>
+	 			<div class="cell small-6 medium-2 meal-box" data-open="meal_modal_<%= m.id %>">
+	 				<%= m.title %>
+	 			</div>
+
+	 			<div class="reveal text-center nav-reveal" id="meal_modal_<%= m.id %>" data-reveal>
+					<ul>
+						<% @patient_meals = PatientMeal.where(delivery_date: @filtered_date).where(meal_option_id: m.id).where.not(order_id: nil).all %>
+						<% @patient_meals.group_by(&:meal_id).each do |meal, patient_meal| %>
+							<% @meal_quantity = patient_meal.count %>
+							<% patient_meal.uniq(&:meal_id).each do |m| %>
+								<%= link_to display_orders_meal_path(:meal => m.meal.id, :filtered_date => @filtered_date) do %>
+								<li>
+								<%= m.meal.title %> <span class="f12 gray">- <%= @meal_quantity %> x orders</span>
+								</li>
+								<% end %>						
+							<% end %>
+						<% end %>
+					</ul>
+				  		<button class="close-button" data-close aria-label="Close modal" type="button">
+				    		<span aria-hidden="true">&times;</span>
+				  		</button>
+	 			</div>
+	 		<% end %>
+ 		</div>
+	</div>
+</li>
+<% end %>
+</ul>
+
+<table>
+	<thead>
+		<th>Patient Name</th>
+		<th>Room Number</th>
+		<th>Site</th>
+		<th>Ward</th>
+		<th>Status</th>
+		<th>Diet Texture</th>
+		<th>Fluid Consistency</th>
+		<th>Menu</th>
+		<th>Notes</th>
+	</thead>
+	<% @patients.each do |patient| %>
+	<tr>
+		<td>
+			<%= link_to patient_path(patient.id, :filter_date => @filtered_date) do %>
+			<%= patient.first_name %> <%= patient.last_name %>
+			<% end %>
+		</td>
+		<td>
+			<%= patient.room_number %>
+		</td>
+		<td>
+			<%= patient.ward.site.name %>
+		</td>
+		<td>
+			<%= patient.ward.name %>
+		</td>
+		<td class="text-center f36">
+			<% @order = Order.where(delivery_date: @filtered_date).where(patient_id: patient.id).last %>
+			<% if @order.blank? || @order == nil %>
+			<i class="fa fa-times-circle secondary-color"></i>
+			<% else %>
+			<i class="fa fa-check-circle success-color"></i>
+			<% end %>
+		</td>
+		<td>
+			<%= patient.diet_texture %>
+		</td>
+		<td>
+			<%= patient.fluid_consistency %>
+		</td>
+		<td>
+			<div data-open="meal_menu_<%= patient.id %>">
+					<i class="fa fa-book button primary"></i>
+			</div>
+
+			<div class="reveal" id="meal_menu_<%= patient.id %>" data-reveal>
+			<button class="close-button" data-close aria-label="Close modal" type="button">
+			  <span aria-hidden="true">&times;</span>
+			</button>
+			</div>
+
+		</td>
+		<td>
+			<%= link_to "Notes", root_path, class: "button primary" %>
+		</td>
+	</tr>
+	<% end %>
+</table>

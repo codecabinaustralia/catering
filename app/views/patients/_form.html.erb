@@ -1,0 +1,77 @@
+<%= form_for(patient) do |f| %>
+  <% if patient.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(patient.errors.count, "error") %> prohibited this patient from being saved:</h2>
+
+      <ul>
+      <% patient.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :ward_id %>
+    <%= f.collection_select :ward_id, Ward.all,:id,:name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :last_name %>
+    <%= f.text_field :last_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :room_number %>
+    <%= f.text_field :room_number %>
+  </div>
+
+  <div class="field">
+    <%= f.label :allergies %>
+    <%= f.text_area :allergies %>
+  </div>
+
+  <div class="field">
+    <%= f.label :diet_type %>
+    <%= f.text_area :diet_type %>
+  </div>
+
+  <div class="field">
+    <%= f.label :diet_texture %>
+    <%= f.text_area :diet_texture %>
+  </div>
+
+  <div class="field">
+    <%= f.label :fluid_consistency %>
+    <%= f.text_area :fluid_consistency %>
+  </div>
+
+  <div class="field">
+    <%= f.label :fluid_restriction %>
+    <%= f.text_area :fluid_restriction %>
+  </div>
+
+  <div class="field">
+    <%= f.label :likes %>
+    <%= f.text_area :likes %>
+  </div>
+
+  <div class="field">
+    <%= f.label :dislikes %>
+    <%= f.text_area :dislikes %>
+  </div>
+
+  <div class="field">
+    <%= f.label :extra_information %>
+    <%= f.text_area :extra_information %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
