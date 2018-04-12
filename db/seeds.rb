@@ -86,9 +86,6 @@ PreloadedMeal.create!([
   {title: "Granola pancakes", ingredients: "125g (1 cup) granola\r\n50g (1/2 cup) rolled oats\r\n2 bananas, peeled\r\n2 eggs\r\n250ml (1 cup) low-fat milk\r\n1/4 teaspoon baking powder\r\nCoconut or Greek-style yoghurt, to serve\r\nMaple syrup, to serve\r\nRaspberries, to serve\r\nStrawberries, to serve", nutritional_info: "1519 kj ENERGY\r\n21g FAT TOTAL\r\n16g SATURATED FAT\r\n4g FIBRE\r\n34g PROTEIN\r\n700mg SODIUM\r\n6g CARBS (SUGAR)\r\n8g CARBS (TOTAL)", notes: ""},
   {title: "Nutty coffee granola", ingredients: "3 cups traditional rolled oats\r\n1/2 cup pepitas\r\n1 cup raw cashews\r\n2/3 cup skinless hazelnuts\r\n1 teaspoon ground cinnamon\r\n1 teaspoon ground ginger\r\n1/2 teaspoon mixed spice\r\n1/4 cup honey\r\n1/4 cup strong brewed coffee\r\n1 tablespoon coconut oil, melted\r\n2 teaspoons vanilla extract\r\n1/2 cup coconut flakes", nutritional_info: "1519 kj ENERGY\r\n21g FAT TOTAL\r\n16g SATURATED FAT\r\n4g FIBRE\r\n34g PROTEIN\r\n700mg SODIUM\r\n6g CARBS (SUGAR)\r\n8g CARBS (TOTAL)", notes: ""}
 ])
-Role.create!([
-  {name: "admin", resource_type: nil, resource_id: nil}
-])
 Site.create!([
   {name: "Gold Coast", user_id: 1},
   {name: "Sydney", user_id: 2},
