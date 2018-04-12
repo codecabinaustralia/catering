@@ -23,7 +23,7 @@ class OrderController < ApplicationController
     if(params.has_key?(:filtered_date))
     @filtered_date = params[:filtered_date]
     else
-    @filtered_date = Time.now.strftime("%Y-%m-%d").to_s.strip
+    @filtered_date = (Time.now + 1.day).strftime("%Y-%m-%d").to_s.strip
     end 
     #for filtering
     @wards = Ward.where(site_id: params[:site_id]).all

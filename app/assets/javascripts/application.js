@@ -18,18 +18,17 @@
 //= require recurring_select
 //= require jquery-mobile-rs
 //= require Chart.min
-//= require chosen-jquery
+//= require select2-full
 //= require_tree .
 
 $(document).on('turbolinks:load', function() {
 	$(function(){ $(document).foundation(); 
 		$('input[type=text].color_wheel').minicolors();
 
-		$('#meal_preloaded_meal_id').chosen({
-		    allow_single_deselect: true,
-		    no_results_text: 'No results matched',
-		    width: '200px'
-		  });   
+		$(".meal_preloaded_meal").select2({
+		  theme: "classic",
+		  width: 'resolve'
+		});   
 
 	});
 	

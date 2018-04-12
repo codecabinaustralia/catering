@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180403032925) do
+ActiveRecord::Schema.define(version: 20180412055918) do
 
   create_table "meal_categories", force: :cascade do |t|
     t.string   "title"
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(version: 20180403032925) do
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
     t.integer  "ward_id"
+    t.string   "avatar"
     t.index ["ward_id"], name: "index_patients_on_ward_id"
   end
 
@@ -128,7 +129,11 @@ ActiveRecord::Schema.define(version: 20180403032925) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "family_member"
+    t.string   "boolean"
+    t.integer  "patient_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["patient_id"], name: "index_users_on_patient_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 

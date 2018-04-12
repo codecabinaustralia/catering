@@ -16,7 +16,7 @@ class Meal < ApplicationRecord
 
   def calendar_meals
         start_date = the_date
-        end_date = the_date + 1.year 
+        end_date = the_date + 5.weeks 
         schedule(start_date).occurrences(end_date).map do |date|
 
             @preloaded_meal = PreloadedMeal.find(preloaded_meal_id)

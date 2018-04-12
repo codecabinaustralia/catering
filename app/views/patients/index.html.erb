@@ -1,47 +1,165 @@
-<p id="notice"><%= notice %></p>
+<div class="grid-x">
+  <div class="cell small-12">
+    <div class="order-search-box">
+    <h3><i class="fa fa-search"></i> Advanced Search</h3>
+      <div class="grid-x grid-margin-x">
 
-<h1>Patients</h1>
+        <div class="cell small-12 medium-4">
+
+          <%= form_tag(display_orders_path, {:method => :get}) do %>
+          <div class="grid-x grid-margin-x">
+            <div class="cell auto">
+              <%= date_field_tag :filtered_date %>
+            </div>
+            <div class="cell shrink text-right">
+              <%= submit_tag "Change Date", class: "button alert" %>
+            </div>
+          </div>  
+          <% end %>
+        </div>
+        <div class="cell auto">
+        <%= form_for(display_orders_path, {:method => :get, remote: true}) do |f| %>
+        <div class="grid-x grid-margin-x">
+        <div class="cell small-12 medium-4">
+        
+          <%= f.collection_select :site_id,
+                     Site.order(:name), :id, :name,
+                     {:prompt => "All Sites"} %>
+        
+        </div>
+        <div class="cell small-12 medium-4">
+            <%= f.grouped_collection_select :ward_id,
+                     Site.order(:name), :wards, :name, :id, :name,
+                     {:prompt => "All Wards"} %>
+        </div>
+        <div class="cell shrink text-right">
+          <%= submit_tag "Filter By Site", class: "button alert search-btn" %>
+        </div>
+        </div>
+        <% end %>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
 
 <table>
   <thead>
-    <tr>
-      <th>First name</th>
-      <th>Last name</th>
-      <th>Room number</th>
-      <th>Allergies</th>
-      <th>Diet type</th>
-      <th>Diet texture</th>
-      <th>Fluid consistency</th>
-      <th>Fluid restriction</th>
-      <th>Likes</th>
-      <th>Dislikes</th>
-      <th>Extra information</th>
-      <th colspan="3"></th>
-    </tr>
+    <th></th>
+    <th>Patient Name</th>
+    <th>Room Number</th>
+    <th>Site</th>
+    <th>Ward</th>
+    <th>Status</th>
+    <th>Diet Texture</th>
+    <th>Fluid Consistency</th>
+    <th>Menu</th>
+    <th>Notes</th>
   </thead>
+  <% @patients.each do |patient| %>
+  <tr>
+    <td>
+      <div class="patient-profile-img-sml">
+        <%  if patient.avatar? %>
+          <%= image_tag(patient.avatar_url) %>
+        <% else %>
+          <img src="https://s3-us-west-2.amazonaws.com/salvation-army/uploads/patient/avatar/avatar.png">
+        <% end %>
+      </div>
+    </td>
+    <td>
+      <%= link_to patient_path(patient.id, :filter_date => @filtered_date) do %>
+      <%= patient.first_name %> <%= patient.last_name %> 
+        <% if patient.allergies.present?%>
+        <span data-tooltip tabindex="1" title="<%= patient.allergies %>">
+        <i class="fa fa-heartbeat secondary-color"></i>
+        </span>
+        <% end %>
+      <% end %>
+    </td>
+    <td>
+      <%= patient.room_number %>
+    </td>
+    <td>
+      <%= patient.ward.site.name %>
+    </td>
+    <td>
+      <%= patient.ward.name %>
+    </td>
+    <td class="text-center f36">
+      <% @order = Order.where(delivery_date: @filtered_date).where(patient_id: patient.id).last %>
+      <% if @order.blank? || @order == nil %>
+      <i class="fa fa-times-circle secondary-color"></i>
+      <% else %>
+      <i class="fa fa-check-circle success-color"></i>
+      <% end %>
+    </td>
+    <td>
+      <%= patient.diet_texture %>
+    </td>
+    <td>
+      <%= patient.fluid_consistency %>
+    </td>
+    <td>
+      <div data-open="meal_menu_<%= patient.id %>">
+          <i class="fa fa-book button primary"></i>
+      </div>
 
-  <tbody>
-    <% @patients.each do |patient| %>
-      <tr>
-        <td><%= patient.first_name %></td>
-        <td><%= patient.last_name %></td>
-        <td><%= patient.room_number %></td>
-        <td><%= patient.allergies %></td>
-        <td><%= patient.diet_type %></td>
-        <td><%= patient.diet_texture %></td>
-        <td><%= patient.fluid_consistency %></td>
-        <td><%= patient.fluid_restriction %></td>
-        <td><%= patient.likes %></td>
-        <td><%= patient.dislikes %></td>
-        <td><%= patient.extra_information %></td>
-        <td><%= link_to 'Show', patient %></td>
-        <td><%= link_to 'Edit', edit_patient_path(patient) %></td>
-        <td><%= link_to 'Destroy', patient, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
+      <div class="reveal" id="meal_menu_<%= patient.id %>" data-reveal>
+      <% @patient_meals = PatientMeal.where(delivery_date: @filtered_date).where(patient_id: patient.id).all %>
+
+        <div class="text-center f40" style="margin-bottom: 40px;">
+          <% if @order.blank? || @order == nil %>
+          <i class="fa fa-times-circle secondary-color"></i>
+          <h3 style="secondary-color">ORDER NOT YET PLACED</h3> 
+          <% else %>
+          <i class="fa fa-check-circle success-color"></i>
+          <h3 style="success-color">ORDER PLACED</h3> 
+          <% end %>
+        </div>
+        <% if @patient_meals.blank? %>
+        <div class="text-center">
+        <h4><%= patient.first_name %> <%= patient.last_name %> has not added any meals yet:</h4>
+        </div>
+        <% else %>
+        <div>
+          <h4><%= patient.first_name %> <%= patient.last_name %> ordered:</h4>
+        </div>
+        <% end %>
+        <table>
+        <% @patient_meals.group_by(&:meal).each do |meal, patient_meal| %>
+            
+          <% patient_meal.each do |pm| %>
+          <h4></h4>
+          <tr>
+            <td><%= pm.meal.title %></td>
+            <td><%= pm.meal.meal_option.meal_category.title %></td>
+          </tr>
+          <% end %>
+        <% end %>
+        </table>
+        
+      
+      <button class="close-button" data-close aria-label="Close modal" type="button">
+
+        <span aria-hidden="true">&times;</span>
+      </button>
+      </div>
+
+    </td>
+    <td>
+      <% if patient.extra_information.present? %>
+      <div class="button primary" data-open="meal_notes_<%= patient.id %>">Notes</div>
+      <div class="reveal" id="meal_notes_<%= patient.id %>" data-reveal>
+      <h3>Notes for <%= patient.first_name %> <%= patient.last_name %></h3>
+      <p><%= patient.extra_information %></p>
+      <button class="close-button" data-close aria-label="Close modal" type="button">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      </div>
+      <% end %>
+    </td>
+  </tr>
+  <% end %>
 </table>
-
-<br>
-
-<%= link_to 'New Patient', new_patient_path %>

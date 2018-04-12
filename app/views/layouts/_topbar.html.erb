@@ -6,17 +6,26 @@
   </div>
   <div class="top-bar-right" >
     <ul class="dropdown menu" data-dropdown-menu>
-    <li style="margin-top:3px;"><%= link_to "Menu Creator", menu_overview_path %></li>
-      <li style="margin-top:3px;"><%= link_to "View Orders", display_orders_path %></li>
-      <li style="margin-top:3px;"><%= link_to "View Patients", patients_path %></li>
+    <% if user_signed_in? %>
+      <% if current_user.family_member.blank? %>
+        <li style="margin-top:3px;"><%= link_to "Menu Creator", menu_overview_path %></li>
+        <li style="margin-top:3px;"><%= link_to "Nurse View", patients_path %></li>
+        <li style="margin-top:3px;"><%= link_to "Chef View", display_orders_path %></li>
+      <% else %>
+        <% @my_guest_patient = Patient.find(current_user.patient_id) %>
+        <li style="margin-top:3px;"><%= link_to "Place an order for #{@my_guest_patient.first_name}", patient_path(@my_guest_patient.id), class: "button success large" %></li>
+      <% end %>
+    <% end %>
 
       <% if user_signed_in? %>
+      <% if current_user.family_member.blank? %>
       <li>
         <div class="button large secondary" data-open="my_account_modal">
         <i class="fa fa-cog" data-open="exampleModal1"></i>
         </div>
         
       </li>
+      <% end %>
         
       <% else %>
         <li>

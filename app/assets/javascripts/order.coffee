@@ -6,6 +6,7 @@ jQuery ->
 
 	wards = $('#_display_orders_ward_id').html()
 	$('#_display_orders_ward_id').hide()
+	$('.search-btn').hide()
 
 	$('#_display_orders_site_id').change ->
 		site = $('#_display_orders_site_id :selected').text()
@@ -13,7 +14,9 @@ jQuery ->
 		if options
 			$('#_display_orders_ward_id').html(options)
 			$('#_display_orders_ward_id').show()
+			$('.search-btn').show()
 		else
 			$('#_display_orders_ward_id').empty()
 			$('#_display_orders_ward_id').hide()
+			$('.search-btn').hide()
 		end

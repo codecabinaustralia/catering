@@ -13,7 +13,8 @@
   <% end %>
 
   <div class="field">
-    <%= f.collection_select(:preloaded_meal_id, PreloadedMeal.all, :id, :title, prompt: true, class: 'chosen-select') %>
+  <label>Select a preloaded meal to add</label>
+    <%= f.collection_select(:preloaded_meal_id, PreloadedMeal.all, :id, :title, {prompt: true}, {class: 'meal_preloaded_meal', style: "width: 100%; height: 80px;"}) %>
   </div>
 
  
@@ -34,8 +35,8 @@
     <%= f.hidden_field :meal_option_id, value:  meal_option.id %>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Add Preloaded Meal", class: "button primary" %>
+  <div class="actions" style="margin-top:20px;">
+    <%= f.submit "Add Meal", class: "button success expanded large" %>
   </div>
 <% end %>
 

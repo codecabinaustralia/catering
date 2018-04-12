@@ -7,7 +7,7 @@ end
 
 
 gem 'rails', '~> 5.0.6'
-gem 'sqlite3'
+
 gem 'puma', '~> 3.0'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
@@ -24,14 +24,22 @@ gem 'recurring_select'
 gem "font-awesome-rails"
 gem 'chart-js-rails'
 gem 'jquery-minicolors-rails'
-gem 'chosen-rails'
+gem "select2-rails"
+gem 'carrierwave'
+gem "fog-aws"
 
 group :development, :test do
   gem 'byebug', platform: :mri
+  gem 'sqlite3'
 end
 
 group :development do
   gem 'web-console', '>= 3.3.0'
+end
+
+group :production do
+  gem 'pg', '~> 0.18'
+  gem 'rails_12factor'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

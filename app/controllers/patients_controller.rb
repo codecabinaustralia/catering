@@ -4,7 +4,16 @@ class PatientsController < ApplicationController
   # GET /patients
   # GET /patients.json
   def index
+    if(params.has_key?(:filtered_date))
+    @filtered_date = params[:filtered_date]
+    else
+    @filtered_date = (Time.now + 1.day).strftime("%Y-%m-%d").to_s.strip
+    end 
+    #for filtering
+    @wards = Ward.where(site_id: params[:site_id]).all
+
     @patients = Patient.all
+    @meal_options = MealOption.all
   end
 
   # GET /patients/1
@@ -92,10 +101,10 @@ class PatientsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def patient_params
-      params.require(:patient).permit(:first_name, :last_name, :room_number, :allergies, :diet_type, :diet_texture, :fluid_consistency, :fluid_restriction, :likes, :dislikes, :extra_information, :ward_id)
+      params.require(:patient).permit(:avatar, :first_name, :last_name, :room_number, :allergies, :diet_type, :diet_texture, :fluid_consistency, :fluid_restriction, :likes, :dislikes, :extra_information, :ward_id)
     end
 
     def patient_meal_params
-      params.require(:patient_meal).permit(:meal_id, :delivery_date, :meal_option_id, :diet_texture, :fluid_consistency, :patient_id)
+      params.require(:patient_meal).permit(:meal_category, :meal_id, :delivery_date, :meal_option_id, :diet_texture, :fluid_consistency, :patient_id)
     end
 end
