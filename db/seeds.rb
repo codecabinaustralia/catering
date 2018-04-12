@@ -1,20 +1,11 @@
-Meal.create!([
-  {title: "Green fish curry", meal_option_id: 8, notes: nil, available_date: "2018-05-17", preloaded_meal_id: 2, relationship_code: "qL2azQ8", the_date: nil},
-  {title: "Green fish curry", meal_option_id: 8, notes: nil, available_date: "2018-04-13", preloaded_meal_id: 2, relationship_code: "qL2azQ8", the_date: "2018-04-12"},
-  {title: "Lamb shank rogan josh curry", meal_option_id: 9, notes: nil, available_date: "2018-05-17", preloaded_meal_id: 3, relationship_code: "bS2Ijb8", the_date: nil},
-  {title: "Lamb shank rogan josh curry", meal_option_id: 9, notes: nil, available_date: "2018-04-13", preloaded_meal_id: 3, relationship_code: "bS2Ijb8", the_date: "2018-04-12"},
-  {title: " Pineapple dump cake", meal_option_id: 10, notes: nil, available_date: "2018-05-17", preloaded_meal_id: 4, relationship_code: "CWQzxFE", the_date: nil},
-  {title: " Pineapple dump cake", meal_option_id: 10, notes: nil, available_date: "2018-04-13", preloaded_meal_id: 4, relationship_code: "CWQzxFE", the_date: "2018-04-12"},
-  {title: "Orange", meal_option_id: 13, notes: nil, available_date: "2018-05-17", preloaded_meal_id: 9, relationship_code: "y6U3Skc", the_date: nil},
-  {title: "Orange", meal_option_id: 13, notes: nil, available_date: "2018-04-13", preloaded_meal_id: 9, relationship_code: "y6U3Skc", the_date: "2018-04-12"},
-  {title: "Gluten-free crumpets", meal_option_id: 14, notes: nil, available_date: "2018-05-17", preloaded_meal_id: 12, relationship_code: "yKWgsGE", the_date: nil},
-  {title: "Gluten-free crumpets", meal_option_id: 14, notes: nil, available_date: "2018-04-13", preloaded_meal_id: 12, relationship_code: "yKWgsGE", the_date: "2018-04-12"},
-  {title: "Brekkie eggs with mayo", meal_option_id: 18, notes: nil, available_date: "2018-05-17", preloaded_meal_id: 10, relationship_code: "pf-hpbQ", the_date: nil},
-  {title: "Brekkie eggs with mayo", meal_option_id: 18, notes: nil, available_date: "2018-04-13", preloaded_meal_id: 10, relationship_code: "pf-hpbQ", the_date: "2018-04-12"},
-  {title: "Lamb shank rogan josh curry", meal_option_id: 22, notes: nil, available_date: "2018-05-17", preloaded_meal_id: 3, relationship_code: "yaYSWuE", the_date: nil},
-  {title: "Lamb shank rogan josh curry", meal_option_id: 22, notes: nil, available_date: "2018-04-13", preloaded_meal_id: 3, relationship_code: "yaYSWuE", the_date: "2018-04-12"},
-  {title: "Nutty coffee granola", meal_option_id: 24, notes: nil, available_date: "2018-05-17", preloaded_meal_id: 15, relationship_code: "SyHa2dE", the_date: nil},
-  {title: "Nutty coffee granola", meal_option_id: 24, notes: nil, available_date: "2018-04-13", preloaded_meal_id: 15, relationship_code: "SyHa2dE", the_date: "2018-04-12"}
+Site.create!([
+  {name: "Gold Coast", user_id: 1},
+  {name: "Sydney", user_id: 2},
+  {name: "Brisbane", user_id: 2}
+])
+Ward.create!([
+  {name: "Ward 1", site_id: 2},
+  {name: "Ward 1", site_id: 3}
 ])
 MealCategory.create!([
   {title: "Breakfast"},
@@ -43,6 +34,24 @@ MealOption.create!([
   {title: "Drink", meal_category_id: 5, color: "#00cc4b"},
   {title: "Dessert", meal_category_id: 6, color: "#e6441c"},
   {title: "Drink", meal_category_id: 6, color: "#991f00"}
+])
+Meal.create!([
+  {title: "Green fish curry", meal_option_id: 8, notes: nil, available_date: "2018-05-17", preloaded_meal_id: 2, relationship_code: "qL2azQ8", the_date: nil},
+  {title: "Green fish curry", meal_option_id: 8, notes: nil, available_date: "2018-04-13", preloaded_meal_id: 2, relationship_code: "qL2azQ8", the_date: "2018-04-12"},
+  {title: "Lamb shank rogan josh curry", meal_option_id: 9, notes: nil, available_date: "2018-05-17", preloaded_meal_id: 3, relationship_code: "bS2Ijb8", the_date: nil},
+  {title: "Lamb shank rogan josh curry", meal_option_id: 9, notes: nil, available_date: "2018-04-13", preloaded_meal_id: 3, relationship_code: "bS2Ijb8", the_date: "2018-04-12"},
+  {title: " Pineapple dump cake", meal_option_id: 10, notes: nil, available_date: "2018-05-17", preloaded_meal_id: 4, relationship_code: "CWQzxFE", the_date: nil},
+  {title: " Pineapple dump cake", meal_option_id: 10, notes: nil, available_date: "2018-04-13", preloaded_meal_id: 4, relationship_code: "CWQzxFE", the_date: "2018-04-12"},
+  {title: "Orange", meal_option_id: 13, notes: nil, available_date: "2018-05-17", preloaded_meal_id: 9, relationship_code: "y6U3Skc", the_date: nil},
+  {title: "Orange", meal_option_id: 13, notes: nil, available_date: "2018-04-13", preloaded_meal_id: 9, relationship_code: "y6U3Skc", the_date: "2018-04-12"},
+  {title: "Gluten-free crumpets", meal_option_id: 14, notes: nil, available_date: "2018-05-17", preloaded_meal_id: 12, relationship_code: "yKWgsGE", the_date: nil},
+  {title: "Gluten-free crumpets", meal_option_id: 14, notes: nil, available_date: "2018-04-13", preloaded_meal_id: 12, relationship_code: "yKWgsGE", the_date: "2018-04-12"},
+  {title: "Brekkie eggs with mayo", meal_option_id: 18, notes: nil, available_date: "2018-05-17", preloaded_meal_id: 10, relationship_code: "pf-hpbQ", the_date: nil},
+  {title: "Brekkie eggs with mayo", meal_option_id: 18, notes: nil, available_date: "2018-04-13", preloaded_meal_id: 10, relationship_code: "pf-hpbQ", the_date: "2018-04-12"},
+  {title: "Lamb shank rogan josh curry", meal_option_id: 22, notes: nil, available_date: "2018-05-17", preloaded_meal_id: 3, relationship_code: "yaYSWuE", the_date: nil},
+  {title: "Lamb shank rogan josh curry", meal_option_id: 22, notes: nil, available_date: "2018-04-13", preloaded_meal_id: 3, relationship_code: "yaYSWuE", the_date: "2018-04-12"},
+  {title: "Nutty coffee granola", meal_option_id: 24, notes: nil, available_date: "2018-05-17", preloaded_meal_id: 15, relationship_code: "SyHa2dE", the_date: nil},
+  {title: "Nutty coffee granola", meal_option_id: 24, notes: nil, available_date: "2018-04-13", preloaded_meal_id: 15, relationship_code: "SyHa2dE", the_date: "2018-04-12"}
 ])
 Patient.create!([
   {first_name: "James", last_name: "Barber", room_number: "A456", allergies: nil, diet_type: "Nil", diet_texture: "Solid", fluid_consistency: "Nil", fluid_restriction: "Nil", likes: "Peppermint Tea", dislikes: "Bread", extra_information: nil, ward_id: 1, avatar: nil},
@@ -75,12 +84,4 @@ PreloadedMeal.create!([
   {title: "Granola pancakes", ingredients: "125g (1 cup) granola\r\n50g (1/2 cup) rolled oats\r\n2 bananas, peeled\r\n2 eggs\r\n250ml (1 cup) low-fat milk\r\n1/4 teaspoon baking powder\r\nCoconut or Greek-style yoghurt, to serve\r\nMaple syrup, to serve\r\nRaspberries, to serve\r\nStrawberries, to serve", nutritional_info: "1519 kj ENERGY\r\n21g FAT TOTAL\r\n16g SATURATED FAT\r\n4g FIBRE\r\n34g PROTEIN\r\n700mg SODIUM\r\n6g CARBS (SUGAR)\r\n8g CARBS (TOTAL)", notes: ""},
   {title: "Nutty coffee granola", ingredients: "3 cups traditional rolled oats\r\n1/2 cup pepitas\r\n1 cup raw cashews\r\n2/3 cup skinless hazelnuts\r\n1 teaspoon ground cinnamon\r\n1 teaspoon ground ginger\r\n1/2 teaspoon mixed spice\r\n1/4 cup honey\r\n1/4 cup strong brewed coffee\r\n1 tablespoon coconut oil, melted\r\n2 teaspoons vanilla extract\r\n1/2 cup coconut flakes", nutritional_info: "1519 kj ENERGY\r\n21g FAT TOTAL\r\n16g SATURATED FAT\r\n4g FIBRE\r\n34g PROTEIN\r\n700mg SODIUM\r\n6g CARBS (SUGAR)\r\n8g CARBS (TOTAL)", notes: ""}
 ])
-Site.create!([
-  {name: "Gold Coast", user_id: 1},
-  {name: "Sydney", user_id: 2},
-  {name: "Brisbane", user_id: 2}
-])
-Ward.create!([
-  {name: "Ward 1", site_id: 2},
-  {name: "Ward 1", site_id: 3}
-])
+
