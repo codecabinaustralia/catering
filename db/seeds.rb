@@ -1,12 +1,3 @@
-Site.create!([
-  {name: "Gold Coast", user_id: 1},
-  {name: "Sydney", user_id: 2},
-  {name: "Brisbane", user_id: 2}
-])
-Ward.create!([
-  {name: "Ward 1", site_id: 2},
-  {name: "Ward 1", site_id: 3}
-])
 MealCategory.create!([
   {title: "Breakfast"},
   {title: "Morning Tea"},
