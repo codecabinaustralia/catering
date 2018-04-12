@@ -1,8 +1,3 @@
-User.create!([
-  {email: "info@theblackandwhites.com.au", encrypted_password: "$2a$11$DTcvDv5Pal86Fsxs2iABF.6MCTW7DH4/QN7QP8WKtrsCqRQqaj0Sm", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 2, current_sign_in_at: "2018-04-11 23:46:47", last_sign_in_at: "2018-03-25 01:57:24", current_sign_in_ip: "127.0.0.1", last_sign_in_ip: "127.0.0.1", family_member: nil, boolean: nil, patient_id: nil},
-  {email: "josh@codecabin.com.au", encrypted_password: "$2a$11$ceVU5D72xBbx5IlAcEeIP./5Lz3xDXDKMvjcJHjN2.3u4yakBWmye", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 1, current_sign_in_at: "2018-03-28 02:09:19", last_sign_in_at: "2018-03-28 02:09:19", current_sign_in_ip: "127.0.0.1", last_sign_in_ip: "127.0.0.1", family_member: nil, boolean: nil, patient_id: nil},
-  {email: "family1@family1.com.au", encrypted_password: "$2a$11$8OeehQcfudeBADz/l0gEted3zZV59csTOhlPN/KXBQJ9xBA/Y1CN6", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 1, current_sign_in_at: "2018-04-12 05:57:08", last_sign_in_at: "2018-04-12 05:57:08", current_sign_in_ip: "127.0.0.1", last_sign_in_ip: "127.0.0.1", family_member: "true", boolean: "true", patient_id: 1}
-])
 Meal.create!([
   {title: "Green fish curry", meal_option_id: 8, notes: nil, available_date: "2018-05-17", preloaded_meal_id: 2, relationship_code: "qL2azQ8", the_date: nil},
   {title: "Green fish curry", meal_option_id: 8, notes: nil, available_date: "2018-04-13", preloaded_meal_id: 2, relationship_code: "qL2azQ8", the_date: "2018-04-12"},
