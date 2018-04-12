@@ -27,6 +27,7 @@ gem 'jquery-minicolors-rails'
 gem "select2-rails"
 gem 'carrierwave'
 gem "fog-aws"
+gem 'seed_dump'
 
 group :development, :test do
   gem 'byebug', platform: :mri
