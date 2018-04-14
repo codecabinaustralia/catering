@@ -44,6 +44,8 @@
 	</div>
 </div>
 
+<%= link_to "PRINT PDF", display_orders_path(format: "pdf", filter_date: @filtered_date), target: "_blank"%>
+
 <ul class="accordion" data-accordion data-multi-expand="true"  data-allow-all-closed="true">
 <% @meal_options.group_by(&:meal_category).each do |meal_category, meal_option| %>
 <li class="accordion-item" data-accordion-item>

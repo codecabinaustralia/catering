@@ -31,6 +31,21 @@ class OrderController < ApplicationController
     @patients = Patient.all
     @meal_options = MealOption.all
 
+    @orders = Order.where(delivery_date: @filtered_date).all
+
+    #PDF
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = DisplayOrder.new(@filtered_date, @patients, @orders)
+        send_data pdf.render,
+          filename: "DisplayOrders-#{@filtered_date}.pdf",
+          type: "application/pdf",
+          disposition: "inline"
+
+      end
+    end
+
   end
 
   def display_orders_meal

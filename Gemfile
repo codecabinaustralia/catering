@@ -28,6 +28,8 @@ gem "select2-rails"
 gem 'carrierwave'
 gem "fog-aws"
 gem 'seed_dump'
+gem 'prawn'
+gem 'prawn-table'
 
 group :development, :test do
   gem 'byebug', platform: :mri

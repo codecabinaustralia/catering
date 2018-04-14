@@ -35,7 +35,13 @@ class PatientsController < ApplicationController
     patient.fluid_consistency = @patient.fluid_consistency
     patient.save
 
-    @patient_meal_items = PatientMeal.where(patient_id: @patient).all
+    if(params.has_key?(:filtered_date))
+    @filtered_date = params[:filtered_date]
+    else
+    @filtered_date = (Time.now + 1.day).strftime("%Y-%m-%d").to_s.strip
+    end
+
+    @patient_meal_items = PatientMeal.where(patient_id: @patient).where(delivery_date: @filtered_date).all
     
 
     respond_to do |format|
