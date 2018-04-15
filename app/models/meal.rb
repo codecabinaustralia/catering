@@ -5,8 +5,8 @@ class Meal < ApplicationRecord
 
 
   def rule
-    IceCube::Rule.daily(1)
-    # Live Data - IceCube::Rule.weekly(5)
+    # For Testing and quick population IceCube::Rule.daily(1)
+    IceCube::Rule.weekly(5)
   end
 
   def schedule(start) 
