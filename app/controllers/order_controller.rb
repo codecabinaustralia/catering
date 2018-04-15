@@ -16,7 +16,7 @@ class OrderController < ApplicationController
 
     respond_to do |format|
         format.html {redirect_to patients_path(:filtered_date => @filtered_date)}
-        format.js{ render :action => "patients_meal" }
+        format.js{ render :action => "meal_category_id, meal_id, delivery_date, meal_option_id, diet_texture, fluid_consistency" }
     end
 
   	
@@ -34,8 +34,13 @@ class OrderController < ApplicationController
     @patients = Patient.all
     @meal_options = MealOption.all
 
-    @patient_meals = PatientMeal.where(delivery_date: @filtered_date).all.select(:patient_id, patient_meals.id).group(:patient_id, patient_meals.id)
-    # Used on local but broke on live postgres .select(:patient_id, patient_meals.id).group(:patient_id, patient_meals.id)
+    #SQLLITE
+    #@patient_meals = PatientMeal.where(delivery_date: @filtered_date).all.select(:patient_id, patient_meals.id).group(:patient_id, patient_meals.id)
+    
+    #POSTGRES
+    @patient_meals = PatientMeal.select("DISTINCT ON (patient_meals.patient_id) * ")
+                       .where(delivery_date: @filtered_date)
+                       .group("")
     #PDF
     respond_to do |format|
       format.html
