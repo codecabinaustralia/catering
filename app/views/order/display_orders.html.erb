@@ -1,4 +1,9 @@
 <div class="grid-x">
+	<div class="cell small-12 text-right">
+		<button class="button" data-open="print-orders" class="button success"><i class="fa fa-file"></i>  Print Orders</button>
+	</div>
+</div>
+<div class="grid-x">
 	<div class="cell small-12">
 		<div class="order-search-box">
 		<h3><i class="fa fa-search"></i> Advanced Search</h3>
@@ -9,7 +14,7 @@
 					<%= form_tag(display_orders_path, {:method => :get}) do %>
 					<div class="grid-x grid-margin-x">
 					  <div class="cell auto">
-					    <%= date_field_tag :filtered_date %>
+					    <%= text_field_tag :filtered_date, "",class: "dp1" %>
 					  </div>
 					  <div class="cell shrink text-right">
 					    <%= submit_tag "Change Date", class: "button alert" %>
@@ -44,7 +49,26 @@
 	</div>
 </div>
 
-<%= link_to "PRINT PDF", display_orders_path(format: "pdf", filter_date: @filtered_date), target: "_blank"%>
+<div class="reveal nav-reveal text-center" id="print-orders" data-reveal>
+<div class="grid-x">
+	<div class="cell small-12">
+		
+	
+<% @meal_categories = MealCategory.all %>
+	<ul>
+	<% @meal_categories.each do |meal_category| %>
+	<%= link_to display_pdf_orders_path(format: "pdf", filtered_date: @filtered_date, meal_category: meal_category.id ), target: "_blank" do %>
+	<li>Print <%= meal_category.title %> Orders</li>
+	<% end %>
+<% end %>
+</ul>
+<button class="close-button" data-close aria-label="Close modal" type="button">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  </div>
+</div>	
+
+</div>
 
 <ul class="accordion" data-accordion data-multi-expand="true"  data-allow-all-closed="true">
 <% @meal_options.group_by(&:meal_category).each do |meal_category, meal_option| %>

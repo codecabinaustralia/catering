@@ -1,10 +1,16 @@
-<p id="notice"><%= notice %></p>
+<div class="grid-x grid-margin-x">
+  <div class="cell small-12 medium-3">
+    <%= render 'settings/side_menu' %>
+  </div>
+  <div class="cell small-12 medium-9">
+  <div class="setting-container">
 
-<h1>Meal Options</h1>
+<h1>Manage Meal Options</h1>
 
-<table>
+<table class="hover">
   <thead>
     <tr>
+      <th>Color</th>
       <th>Title</th>
       <th>Meal category</th>
       <th colspan="3"></th>
@@ -14,8 +20,9 @@
   <tbody>
     <% @meal_options.each do |meal_option| %>
       <tr>
+        <td width="80" style="background-color: <%= meal_option.color %>"></td>
         <td><%= meal_option.title %></td>
-        <td><%= meal_option.meal_category %></td>
+        <td><%= meal_option.meal_category.title %></td>
         <td><%= link_to 'Show', meal_option %></td>
         <td><%= link_to 'Edit', edit_meal_option_path(meal_option) %></td>
         <td><%= link_to 'Destroy', meal_option, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -26,4 +33,6 @@
 
 <br>
 
-<%= link_to 'New Meal Option', new_meal_option_path %>
+<%= link_to 'New Meal Option', new_meal_option_path, class: "button success large" %>
+
+</div></div></div>

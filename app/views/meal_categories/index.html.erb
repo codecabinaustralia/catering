@@ -1,8 +1,13 @@
-<p id="notice"><%= notice %></p>
+<div class="grid-x grid-margin-x">
+  <div class="cell small-12 medium-3">
+    <%= render 'settings/side_menu' %>
+  </div>
+  <div class="cell small-12 medium-9">
+  <div class="setting-container">
 
-<h1>Meal Categories</h1>
+<h1>Manage Meal Categories</h1>
 
-<table>
+<table class="hover">
   <thead>
     <tr>
       <th>Title</th>
@@ -24,4 +29,8 @@
 
 <br>
 
-<%= link_to 'New Meal Category', new_meal_category_path %>
+<%= link_to 'New Meal Category', new_meal_category_path, class: "button success large" %>
+
+</div>
+</div>
+</div>

@@ -1,14 +1,11 @@
 Rails.application.routes.draw do
   
-
-  get 'settings/meals'
-
-  get 'settings/patients'
-
-  get 'settings/sites_and_wards'
+  get 'settings/general'
 
   resources :preloaded_meals
   get 'display_orders' => 'order#display_orders'
+  get 'display_pdf_orders' => 'order#display_pdf_orders'
+
   get 'display_orders_meal' => 'order#display_orders_meal'
   get 'menu_overview' => 'order#menu_overview'
 
@@ -21,6 +18,7 @@ Rails.application.routes.draw do
     get 'build_order' => 'order#build_order'
     post 'patient_meal' => 'patients#patients_meal'
     get 'patient_meal' => 'patients#patients_meal'
+    get 'remove_patient_meal' => 'patients#remove_patient_meal'
   end
   resources :wards
   resources :sites

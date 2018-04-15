@@ -19,7 +19,6 @@ class PatientsController < ApplicationController
   # GET /patients/1
   # GET /patients/1.json
   def show
-
     @patient_meal = PatientMeal.new
     @meal_options = MealOption.all
   end
@@ -29,11 +28,13 @@ class PatientsController < ApplicationController
     @meals = Meal.all
     @patient = Patient.find(params[:patient_id])
 
-    patient = PatientMeal.new(patient_meal_params)
-    patient.patient_id = @patient.id
-    patient.diet_texture = @patient.diet_texture
-    patient.fluid_consistency = @patient.fluid_consistency
-    patient.save
+    @patient_meal_item = PatientMeal.new(patient_meal_params)
+    @patient_meal_item.patient_id = @patient.id
+    @patient_meal_item.diet_texture = @patient.diet_texture
+    @patient_meal_item.fluid_consistency = @patient.fluid_consistency
+    @patient_meal_item.save!
+
+
 
     if(params.has_key?(:filtered_date))
     @filtered_date = params[:filtered_date]
@@ -48,6 +49,15 @@ class PatientsController < ApplicationController
         format.js{ render :action => "patients_meal" }
     end
 
+  end
+
+  def remove_patient_meal
+    @patient_meal_item = PatientMeal.find(params[:patient_meal])
+    @patient_meal_item.destroy
+
+    respond_to do |format|
+        format.js{ render :action => "remove_patient_meal" }
+    end
   end
 
   # GET /patients/new
@@ -111,6 +121,6 @@ class PatientsController < ApplicationController
     end
 
     def patient_meal_params
-      params.require(:patient_meal).permit(:meal_category, :meal_id, :delivery_date, :meal_option_id, :diet_texture, :fluid_consistency, :patient_id)
+      params.require(:patient_meal).permit(:meal_category_id, :meal_id, :delivery_date, :meal_option_id, :diet_texture, :fluid_consistency, :patient_id)
     end
 end

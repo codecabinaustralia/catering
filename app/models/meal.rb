@@ -1,6 +1,7 @@
 class Meal < ApplicationRecord
   belongs_to :meal_option
   belongs_to :preloaded_meal
+  has_many :patient_meals
 
 
   def rule

@@ -69,6 +69,6 @@ class PreloadedMealsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def preloaded_meal_params
-      params.require(:preloaded_meal).permit(:title, :ingredients, :nutritional_info, :notes)
+      params.require(:preloaded_meal).permit(:title, :ingredients, :nutritional_info, :notes, dietary_restrictions_attributes: [:id, :food_texture, :_destroy])
     end
 end

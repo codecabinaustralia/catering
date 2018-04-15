@@ -1,12 +1,16 @@
-<p id="notice"><%= notice %></p>
+<div class="grid-x grid-margin-x">
+  <div class="cell small-12 medium-3">
+    <%= render 'settings/side_menu' %>
+  </div>
+  <div class="cell small-12 medium-9">
+  <div class="setting-container">
 
-<h1>Sites</h1>
+<h1>Manage Sites</h1>
 
 <table>
   <thead>
     <tr>
       <th>Name</th>
-      <th>User</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -15,7 +19,6 @@
     <% @sites.each do |site| %>
       <tr>
         <td><%= site.name %></td>
-        <td><%= site.user %></td>
         <td><%= link_to 'Show', site %></td>
         <td><%= link_to 'Edit', edit_site_path(site) %></td>
         <td><%= link_to 'Destroy', site, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -26,4 +29,5 @@
 
 <br>
 
-<%= link_to 'New Site', new_site_path %>
+<%= link_to 'New Site', new_site_path, class: "button large success" %>
+</div></div></div>

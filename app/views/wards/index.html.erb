@@ -1,4 +1,9 @@
-<p id="notice"><%= notice %></p>
+<div class="grid-x grid-margin-x">
+  <div class="cell small-12 medium-3">
+    <%= render 'settings/side_menu' %>
+  </div>
+  <div class="cell small-12 medium-9">
+  <div class="setting-container">
 
 <h1>Wards</h1>
 
@@ -15,7 +20,7 @@
     <% @wards.each do |ward| %>
       <tr>
         <td><%= ward.name %></td>
-        <td><%= ward.site %></td>
+        <td><%= ward.site.name %></td>
         <td><%= link_to 'Show', ward %></td>
         <td><%= link_to 'Edit', edit_ward_path(ward) %></td>
         <td><%= link_to 'Destroy', ward, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -26,4 +31,6 @@
 
 <br>
 
-<%= link_to 'New Ward', new_ward_path %>
+<%= link_to 'New Ward', new_ward_path, class: "button large success" %>
+
+</div></div></div>

@@ -30,6 +30,8 @@ gem "fog-aws"
 gem 'seed_dump'
 gem 'prawn'
 gem 'prawn-table'
+gem 'foundation-datepicker-rails'
+gem "nested_form"
 
 group :development, :test do
   gem 'byebug', platform: :mri

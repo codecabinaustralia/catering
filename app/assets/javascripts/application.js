@@ -19,6 +19,8 @@
 //= require jquery-mobile-rs
 //= require Chart.min
 //= require select2-full
+//= require foundation-datepicker
+//= require jquery_nested_form
 //= require_tree .
 
 $(document).on('turbolinks:load', function() {
@@ -29,6 +31,16 @@ $(document).on('turbolinks:load', function() {
 		  theme: "classic",
 		  width: 'resolve'
 		});   
+
+		$('.dp1').fdatepicker({
+			initialDate: '02-12-1989',
+			format: 'yyyy-mm-dd',
+			disableDblClickSelection: true,
+			leftArrow:'<<',
+			rightArrow:'>>',
+			closeButton: false
+		});
+
 
 	});
 	

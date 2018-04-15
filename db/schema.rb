@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180412055918) do
+ActiveRecord::Schema.define(version: 20180415071416) do
+
+  create_table "dietary_restrictions", force: :cascade do |t|
+    t.integer  "preloaded_meal_id"
+    t.string   "food_texture"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["preloaded_meal_id"], name: "index_dietary_restrictions_on_preloaded_meal_id"
+  end
 
   create_table "meal_categories", force: :cascade do |t|
     t.string   "title"
@@ -63,6 +71,8 @@ ActiveRecord::Schema.define(version: 20180412055918) do
     t.string   "diet_texture"
     t.string   "fluid_consistency"
     t.integer  "order_id"
+    t.integer  "meal_category_id"
+    t.index ["meal_category_id"], name: "index_patient_meals_on_meal_category_id"
     t.index ["meal_id"], name: "index_patient_meals_on_meal_id"
     t.index ["meal_option_id"], name: "index_patient_meals_on_meal_option_id"
     t.index ["order_id"], name: "index_patient_meals_on_order_id"
