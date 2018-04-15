@@ -34,7 +34,7 @@ class OrderController < ApplicationController
     @patients = Patient.all
     @meal_options = MealOption.all
 
-    @patient_meals = PatientMeal.where(delivery_date: @filtered_date).select(:patient_id, :id).group(:patient_id, :id).all
+    @patient_meals = PatientMeal.where(delivery_date: @filtered_date).all
 
     #PDF
     respond_to do |format|
