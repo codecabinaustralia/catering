@@ -34,8 +34,8 @@ class OrderController < ApplicationController
     @patients = Patient.all
     @meal_options = MealOption.all
 
-    @patient_meals = PatientMeal.where(delivery_date: @filtered_date).all
-
+    @patient_meals = PatientMeal.where(delivery_date: @filtered_date).all.select(:patient_id, patient_meals.id).group(:patient_id, patient_meals.id)
+    # Used on local but broke on live postgres .select(:patient_id, patient_meals.id).group(:patient_id, patient_meals.id)
     #PDF
     respond_to do |format|
       format.html
