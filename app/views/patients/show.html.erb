@@ -189,7 +189,7 @@
                     <%= f.hidden_field :meal_id, value: meal.id %>
                     <%= f.hidden_field :meal_category_id, value: meal.meal_option.meal_category_id %>
                     <%= f.hidden_field :patient_id, value: @patient.id %>
-                    <%= f.hidden_field :meal_option_id, value: meal.meal_option_id %>
+                    <%= f.text_field :meal_option_id, value: meal.meal_option_id %>
                     <%= f.hidden_field :delivery_date, value: @filtered_date %>
                     <%= button_tag type: 'submit', class: "button success expanded large", id: "patient_meal", style:"margin-top: 40px;" do %>
                             <i class="fa fa-plus-circle" aria-hidden="true"></i> ADD
