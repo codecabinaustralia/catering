@@ -1,4 +1,4 @@
 class MealOption < ApplicationRecord
   belongs_to :meal_category
-  belongs_to :patient_meal
+  has_many :patient_meal
 end
