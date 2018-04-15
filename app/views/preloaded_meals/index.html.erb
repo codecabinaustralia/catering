@@ -37,4 +37,11 @@
 
 <%= link_to 'New Preloaded Meal', new_preloaded_meal_path, class: "button large success" %>
 
+<hr />
+<h2>IMPORT </h2>
+<%= form_tag import_preloaded_meals_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Import" %>
+<% end %>
+
 </div></div></div>

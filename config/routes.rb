@@ -3,6 +3,11 @@ Rails.application.routes.draw do
   get 'settings/general'
 
   resources :preloaded_meals
+
+  #import paths
+  post 'import_preloaded_meals' => 'preloaded_meals#import_preloaded_meals'
+  post 'import_patients' => 'patients#import_patients'
+
   get 'display_orders' => 'order#display_orders'
   get 'display_pdf_orders' => 'order#display_pdf_orders'
 

@@ -3,6 +3,11 @@ class PatientsController < ApplicationController
 
   # GET /patients
   # GET /patients.json
+  def import_patients
+    Patient.import(params[:file])
+    redirect_to patients_path
+  end
+
   def index
     if(params.has_key?(:filtered_date))
     @filtered_date = params[:filtered_date]

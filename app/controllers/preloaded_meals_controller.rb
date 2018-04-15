@@ -1,6 +1,12 @@
 class PreloadedMealsController < ApplicationController
   before_action :set_preloaded_meal, only: [:show, :edit, :update, :destroy]
 
+
+
+  def import_preloaded_meals
+    PreloadedMeal.import(params[:file])
+    redirect_to preloaded_meals_path
+  end
   # GET /preloaded_meals
   # GET /preloaded_meals.json
   def index
@@ -69,6 +75,6 @@ class PreloadedMealsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def preloaded_meal_params
-      params.require(:preloaded_meal).permit(:title, :ingredients, :nutritional_info, :notes, dietary_restrictions_attributes: [:id, :food_texture, :_destroy])
+      params.require(:preloaded_meal).permit(:title, :ingredients, :nutritional_info, :notes)
     end
 end

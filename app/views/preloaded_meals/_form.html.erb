@@ -1,4 +1,4 @@
-<%= nested_form_for @preloaded_meal do |f| %>
+<%= form_for @preloaded_meal do |f| %>
   <% if preloaded_meal.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(preloaded_meal.errors.count, "error") %> prohibited this preloaded_meal from being saved:</h2>
@@ -30,16 +30,7 @@
     <%= f.label :notes %>
     <%= f.text_area :notes %>
   </div>
-
-  <h2>Restrict Food Textures</h2>
-
-  <%= f.fields_for :dietary_restrictions do |r_form| %>
-    <% @food_textures = Patient.all %>
-    <%= r_form.collection_select :food_texture, @food_textures.select(:diet_texture).uniq, :diet_texture, :diet_texture %>
-    <%= r_form.link_to_remove "Remove this restriction" %>
-  <% end %>
-  <p><%= f.link_to_add "Add a restriction", :dietary_restrictions %></p>
-
+  
   <div class="actions">
     <%= f.submit "Add New Recipe", class: "button success large" %>
   </div>

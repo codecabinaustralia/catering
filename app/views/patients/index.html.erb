@@ -163,3 +163,11 @@
   </tr>
   <% end %>
 </table>
+
+
+<hr />
+<h2>IMPORT </h2>
+<%= form_tag import_patients_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Import" %>
+<% end %>

@@ -68,7 +68,7 @@ class MealOptionsController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def meal_option_params
+    def meal_option_params 
       params.require(:meal_option).permit(:title, :meal_category_id, :color)
     end
 end
