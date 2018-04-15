@@ -15,7 +15,7 @@ class OrderController < ApplicationController
     end
 
     respond_to do |format|
-        format.html {redirect_to display_orders_path(:filtered_date => @filtered_date)}
+        format.html {redirect_to patients_path(:filtered_date => @filtered_date)}
         format.js{ render :action => "patients_meal" }
     end
 
