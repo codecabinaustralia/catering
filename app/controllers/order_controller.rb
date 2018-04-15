@@ -16,7 +16,7 @@ class OrderController < ApplicationController
 
     respond_to do |format|
         format.html {redirect_to patients_path(:filtered_date => @filtered_date)}
-        format.js{ render :action => "meal_category_id, meal_id, delivery_date, meal_option_id, diet_texture, fluid_consistency" }
+        format.js{ render :action => "patients_meal" }
     end
 
   	
@@ -34,13 +34,8 @@ class OrderController < ApplicationController
     @patients = Patient.all
     @meal_options = MealOption.all
 
-    #SQLLITE
-    #@patient_meals = PatientMeal.where(delivery_date: @filtered_date).all.select(:patient_id, patient_meals.id).group(:patient_id, patient_meals.id)
+    @patient_meals = PatientMeal.where(delivery_date: @filtered_date).all.select(:patient_id, patient_meals.id).group(:patient_id, patient_meals.id)
     
-    #POSTGRES
-    @patient_meals = PatientMeal.select("DISTINCT ON (patient_meals.patient_id) * ")
-                       .where(delivery_date: @filtered_date)
-                       .group("")
     #PDF
     respond_to do |format|
       format.html
@@ -63,7 +58,7 @@ class OrderController < ApplicationController
     @filtered_date = (Time.now + 1.day).strftime("%Y-%m-%d").to_s.strip
     end 
     @patients = Patient.all
-    @patient_meals = PatientMeal.where.not(order_id: nil).where(meal_category_id: @meal_category.id).where(delivery_date: @filtered_date).group(:patient_id).all
+    @patient_meals = PatientMeal.where.not(order_id: nil).where(meal_category_id: @meal_category.id).where(delivery_date: @filtered_date).select(:patient_id, :id).group(:patient_id, :id).all
     @unconfirmed_patient_meals = PatientMeal.where(order_id: nil).where(meal_category_id: @meal_category.id).where(delivery_date: @filtered_date).group(:patient_id).all
 
     #PDF
