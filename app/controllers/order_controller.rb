@@ -58,7 +58,7 @@ class OrderController < ApplicationController
     @filtered_date = (Time.now + 1.day).strftime("%Y-%m-%d").to_s.strip
     end 
     @patients = Patient.all
-    @patient_meals = PatientMeal.where.not(order_id: nil).where(meal_category_id: @meal_category.id).where(delivery_date: @filtered_date).select(:patient_id, :id).group(:patient_id, :id).all
+    @patient_meals = PatientMeal.where.not(order_id: nil).where(meal_category_id: @meal_category.id).where(delivery_date: @filtered_date).group(:patient_id).all
     @unconfirmed_patient_meals = PatientMeal.where(order_id: nil).where(meal_category_id: @meal_category.id).where(delivery_date: @filtered_date).group(:patient_id).all
 
     #PDF
