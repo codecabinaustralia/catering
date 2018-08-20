@@ -26,7 +26,7 @@ MealOption.create!([
   {title: "Dessert", meal_category_id: 6, color: "#e6441c"},
   {title: "Drink", meal_category_id: 6, color: "#991f00"}
 ])
-Patient.create(first_name: "James", last_name: "Barber", room_number: "A456", allergies: nil, diet_type: "Nil", diet_texture: "Solid", fluid_consistency: "Nil", fluid_restriction: "Nil", likes: "Peppermint Tea", dislikes: "Bread", extra_information: nil, ward_id: 1, avatar: nil)
+Patient.create(first_name: "James", last_name: "Barber", room_number: "A456", allergies: nil, diet_type: "Nil", diet_texture: "Solid", fluid_consistency: "Nil", fluid_restriction: "Nil", likes: "Peppermint Tea", dislikes: "Bread", extra_information: nil, avatar: nil)
 Patient.create(first_name: "James", last_name: "Barber", room_number: "A456", allergies: nil, diet_type: "Nil", diet_texture: "Solid", fluid_consistency: "Nil", fluid_restriction: "Nil", likes: "Peppermint Tea", dislikes: "Bread", extra_information: nil)
 Patient.create(first_name: "Bob", last_name: "Marley", room_number: "456", allergies: "Asthma", diet_type: "Normal", diet_texture: "Puree", fluid_consistency: "Normal", fluid_restriction: "None", likes: "chocolate", dislikes: "Vegemite", extra_information: "Can be quite agressive if told what to do.")
 Patient.create(first_name: "Precious", last_name:"Lucy", room_number: "225", allergies: "Peanuts, Eggs", diet_type: "Gluten Free", diet_texture: "Cut Up", fluid_consistency: "Level 1", fluid_restriction: nil, likes: "Chocolate", dislikes: "Vegetables", extra_information: "Needs assistance to eat")
