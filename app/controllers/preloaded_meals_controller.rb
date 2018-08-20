@@ -16,6 +16,25 @@ class PreloadedMealsController < ApplicationController
   # GET /preloaded_meals/1
   # GET /preloaded_meals/1.json
   def show
+    @all_ingredients = IngredientPreloadedMeal.where(preloaded_meal_id: @preloaded_meal).all
+
+    @a = []
+
+    @all_ingredients.each do |preload|
+      sub_total = sprintf('%.2f', preload.ingredient.price.to_d * preload.quantity.to_i)
+      @a.push(sub_total.to_d)
+    end
+
+    @sum = 0
+
+    i = 0
+    while i < @a.length
+      @sum += @a[i]
+      i = i + 1
+    end
+
+    @preloaded_meal.update_attributes(total_price: @sum.to_d)
+
   end
 
   # GET /preloaded_meals/new
@@ -75,6 +94,6 @@ class PreloadedMealsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def preloaded_meal_params
-      params.require(:preloaded_meal).permit(:title, :ingredients, :nutritional_info, :notes)
+      params.require(:preloaded_meal).permit(:title, :ingredients, :nutritional_info, :notes, :ingredient_id, :method, ingredient_preloaded_meals_attributes: [:id, :ingredient_id, :quantity, :_destroy])
     end
 end

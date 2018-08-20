@@ -1,0 +1,129 @@
+<h1>Totals Dashboard</h1>
+
+
+<div class="grid-x">
+	<div class="cell small-12">
+		<div class="order-search-box">
+		<h3><i class="fa fa-search"></i> Advanced Search</h3>
+			<div class="grid-x grid-margin-x">
+
+				<div class="cell small-12 medium-6">
+
+					<%= form_tag(dashboard_IngredientTotals_path, {:method => :get}) do %>
+					<div class="grid-x grid-margin-x">
+					  <div class="cell auto">
+					    <%= text_field_tag :filter_from_date, "", placeholder: "Date From", class: "dp1" %>
+					  </div>
+					  <div class="cell auto">
+					    <%= text_field_tag :filter_to_date, "", placeholder: "Date To" ,class: "dp1" %>
+					  </div>
+					  <div class="cell shrink text-right">
+					    <%= submit_tag "Change Date", class: "button alert" %>
+					  </div>
+					</div>  
+					<% end %>
+				</div>
+				<div class="cell auto">
+				<%= form_for(display_orders_path, {:method => :get, remote: true}) do |f| %>
+				<div class="grid-x grid-margin-x">
+				<div class="cell small-12 medium-4">
+				
+					<%= f.collection_select :site_id,
+					           Site.order(:name), :id, :name,
+					           {:prompt => "All Sites"} %>
+				
+				</div>
+				<div class="cell small-12 medium-4">
+						<%= f.grouped_collection_select :ward_id,
+					           Site.order(:name), :wards, :name, :id, :name,
+					           {:prompt => "All Wards"} %>
+				</div>
+				<div class="cell shrink text-right">
+				  <%= submit_tag "Filter by Site", class: "button alert search-btn" %>
+				</div>
+				</div>
+				<% end %>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</div>
+
+<table>
+	<thead>
+		<th>Meal</th>
+		<th>Order Count</th>
+		<th>Average Meal Price</th>
+		<th>Total</th>
+	</thead>
+
+<% @a = [] %>
+<% @b = [] %>
+
+<% if @meals.present? %>
+<% @meals.each do |meal| %>
+
+
+<% @meal_options = MealOption.find(meal.meal_option_id) %>
+<% @patient_meals = PatientMeal.where(meal_id: meal.id).all %>
+<% @preloaded_meal = PreloadedMeal.find(meal.preloaded_meal_id)%>
+
+
+
+	<tr>
+		<td><%= link_to meal.title, preloaded_meal_path(meal.preloaded_meal_id) %></td>
+		<td><%= @patient_meals.count %></td>
+		<td><%= number_to_currency(@preloaded_meal.total_price, precision: 2) %></td>
+		<td><%= number_to_currency((@preloaded_meal.total_price * @patient_meals.count), precision: 2) %></td>
+	</tr>
+	<% @a.push(@patient_meals.count) %>
+	<% @b.push(@preloaded_meal.total_price * @patient_meals.count) %>
+
+<% end %>
+
+	<% @total_orders_a = 0 %>
+
+	<% i = 0 %>
+	<% while i < @a.length %>
+	  <% @total_orders_a += @a[i] %>
+	  <% i = i + 1 %>
+	<% end %>
+
+	<% @total_price_a = 0 %>
+
+	<% j = 0 %>
+	<% while j < @a.length %>
+	  <% @total_price_a += @b[j] %>
+	  <% j = j + 1 %>
+	<% end %>
+
+	<tr style="background-color: #303030; color: #fff;">
+		<td><strong>TOTAL:</strong></td>
+		<td><%= @total_orders_a %></td>
+		<td><%= number_to_currency((@total_price_a / @total_orders_a), precision: 2) %></td>
+		<td><%= number_to_currency(@total_price_a, precision: 2) %></td>
+	</tr>
+<% end %>
+</table>
+
+
+
+<h2> Ingredients </h2>
+<table>
+	<thead>
+		<th>Item</th>
+		<th>Quantity</th>
+		<th>Item price</th>
+		<th>Total</th>
+	</thead>
+<% @preloaded_ingredients.group(:ingredient_id).each do |preloaded_ingredient| %>
+	<% @quantity = IngredientPreloadedMeal.where(ingredient_id: preloaded_ingredient.ingredient_id).sum(:quantity) %>
+	<tr>
+		<td><%= preloaded_ingredient.ingredient.title %></td>
+		<td><%= @quantity %> <%= preloaded_ingredient.ingredient.unit_measure %></td>
+		<td><%= preloaded_ingredient.ingredient.price %></td>
+		<td><strong><%= number_to_currency(@quantity.to_i * preloaded_ingredient.ingredient.price.to_d) %></strong></td>
+	</tr>
+<% end %>
+</table>

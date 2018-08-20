@@ -1,4 +1,4 @@
-<%= form_for @preloaded_meal do |f| %>
+<%= nested_form_for @preloaded_meal do |f| %>
   <% if preloaded_meal.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(preloaded_meal.errors.count, "error") %> prohibited this preloaded_meal from being saved:</h2>
@@ -16,15 +16,28 @@
     <%= f.text_field :title %>
   </div>
 
-  <div class="field">
-    <%= f.label :ingredients %>
-    <%= f.text_area :ingredients %>
+  <div class="field" style="margin: 20px 0;" >
+    <%= f.label :method %>
+    <%= f.text_area :method, rows: 9, :class => "tinymce" %>
   </div>
 
-  <div class="field">
-    <%= f.label :nutritional_info %>
-    <%= f.text_area :nutritional_info %>
-  </div>
+  <%= f.fields_for :ingredient_preloaded_meals do |task_form| %>
+    <div class="field">      <div class="grid-x grid-margin-x">
+        
+        <div class="cell small-2">Ingredient</div>
+        <div class="cell auto"><%= task_form.collection_select(:ingredient_id,  Ingredient.all, :id, :title_with_measure, prompt: true) %></div>
+        <div class="cell small-12"></div>
+        <div class="cell small-2">Quantity</div>
+        <div class="cell auto"><%= task_form.number_field :quantity %></div>
+      </div>
+      
+      
+    </div>
+    <%= task_form.link_to_remove "Remove ingredient", class: "button small alert" %>
+  <% end %>
+  <p><%= f.link_to_add "Add ingredient", :ingredient_preloaded_meals, class: "button small success" %></p>
+
+
 
   <div class="field">
     <%= f.label :notes %>
@@ -35,3 +48,6 @@
     <%= f.submit "Add New Recipe", class: "button success large" %>
   </div>
 <% end %>
+
+
+<%= tinymce %>

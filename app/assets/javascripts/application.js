@@ -21,6 +21,7 @@
 //= require select2-full
 //= require foundation-datepicker
 //= require jquery_nested_form
+//= require tinymce
 //= require_tree .
 
 $(document).on('turbolinks:load', function() {

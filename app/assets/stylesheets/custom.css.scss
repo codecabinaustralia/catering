@@ -122,7 +122,6 @@ overflow: visible !important;
 /* containers */
 
 body{
-	background-image: url('http://res.cloudinary.com/theblackandwhites/image/upload/v1522268481/salvation_army/image.jpg') !important;
 	background-position:center;
 	background-size: 100% !important;
 	background-color: $light-gray;
@@ -429,3 +428,15 @@ select.meal_preloaded_meal{
 }
 
 /* Calender */
+
+/* Preloaded Meals */
+
+.method{
+	margin: 40px 0;
+}
+
+.notes{
+	padding: 20px;
+	background-color: #f5f5f5;
+	border: 4px solid #e5e5e5;
+}

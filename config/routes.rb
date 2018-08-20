@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   
+  get 'dashboard/IngredientTotals'
+
+  resources :ingredients
   get 'settings/general'
 
   resources :preloaded_meals

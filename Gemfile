@@ -32,6 +32,7 @@ gem 'prawn'
 gem 'prawn-table'
 gem 'foundation-datepicker-rails'
 gem "nested_form"
+gem 'tinymce-rails'
 
 group :development, :test do
   gem 'byebug', platform: :mri

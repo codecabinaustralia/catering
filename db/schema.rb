@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180415071416) do
+ActiveRecord::Schema.define(version: 20180820082504) do
 
   create_table "dietary_restrictions", force: :cascade do |t|
     t.integer  "preloaded_meal_id"
@@ -18,6 +18,25 @@ ActiveRecord::Schema.define(version: 20180415071416) do
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
     t.index ["preloaded_meal_id"], name: "index_dietary_restrictions_on_preloaded_meal_id"
+  end
+
+  create_table "ingredient_preloaded_meals", force: :cascade do |t|
+    t.integer  "ingredient_id"
+    t.integer  "preloaded_meal_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.integer  "quantity"
+    t.index ["ingredient_id"], name: "index_ingredient_preloaded_meals_on_ingredient_id"
+    t.index ["preloaded_meal_id"], name: "index_ingredient_preloaded_meals_on_preloaded_meal_id"
+  end
+
+  create_table "ingredients", force: :cascade do |t|
+    t.string   "title"
+    t.string   "price"
+    t.string   "unit_measure"
+    t.string   "unit_quantity"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "meal_categories", force: :cascade do |t|
@@ -105,6 +124,8 @@ ActiveRecord::Schema.define(version: 20180415071416) do
     t.text     "notes"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.text     "method"
+    t.decimal  "total_price"
   end
 
   create_table "roles", force: :cascade do |t|

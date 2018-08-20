@@ -1,5 +1,5 @@
 class Patient < ApplicationRecord
-	belongs_to :ward
+	belongs_to :ward, required: false
 	mount_uploader :avatar, AvatarUploader
 
 	def full_name

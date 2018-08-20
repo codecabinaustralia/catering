@@ -1,6 +1,8 @@
 class PreloadedMeal < ApplicationRecord
 	has_many :meals
 	has_many :dietary_restrictions
+	has_many :ingredient_preloaded_meals
+	accepts_nested_attributes_for :ingredient_preloaded_meals
 
 	def self.csv(options = {})
 		CSV.generate(options) do |csv|

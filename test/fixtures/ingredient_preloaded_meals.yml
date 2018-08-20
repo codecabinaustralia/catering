@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ingredient: one
+  preloaded_meal: one
+
+two:
+  ingredient: two
+  preloaded_meal: two

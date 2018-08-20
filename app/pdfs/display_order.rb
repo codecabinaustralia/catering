@@ -1,5 +1,7 @@
 class DisplayOrder < Prawn::Document
-	
+	require 'prawn'
+	require 'prawn/table'
+	require "open-uri"
 
 	def initialize(filtered_date, patients, patient_meals)
 		super( page_layout: :landscape, page_size: "A3")

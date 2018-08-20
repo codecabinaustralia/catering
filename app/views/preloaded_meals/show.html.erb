@@ -1,24 +1,59 @@
-<p id="notice"><%= notice %></p>
+<div class="grid-x grid-margin-x">
+	<div class="cell small-12 medium-6">
+		<div class="grid-x">
+			<div class="cell small-6">
+				<h2>Ingredients &amp; costs</h2>
+			</div>
+			<div class="cell small-6 text-right">
+				<%= link_to 'Alter Ingredients', edit_preloaded_meal_path(@preloaded_meal), class: "button primary" %>
+			</div>
+		</div>
+		
+		
+		<table>
 
-<p>
-  <strong>Title:</strong>
-  <%= @preloaded_meal.title %>
-</p>
+			<thead>
+				
+				<th>Title</th>
+				<th>Unit Measure</th>
+				<th>Quantity</th>
+				<th>Cost per unit</th>
+				<th class="text-center" style="background-color: #303030; color: white;">Total Cost</th>
+			</thead>
+			<% @all_ingredients.each do |preload| %>
 
-<p>
-  <strong>Ingredients:</strong>
-  <%= @preloaded_meal.ingredients %>
-</p>
+			<tr>
+				
+				<td><%= preload.ingredient.title %></td>
+				<td><%= preload.ingredient.unit_measure %></td>
+				<td><%= preload.quantity %> x</td>
+				<td><%= number_to_currency(preload.ingredient.price) %></td>
+				<td class="text-center" style="background-color: #303030; color: white;"><strong><%= number_to_currency(preload.ingredient.price.to_d * preload.quantity.to_i, precision: 2) %></strong></td>
+			</tr>
 
-<p>
-  <strong>Nutritional info:</strong>
-  <%= @preloaded_meal.nutritional_info %>
-</p>
+			<% end %>
+			<tr>
+				<td colspan="3" style="background-color: #f5f5f5; color: #fff;">
+				<td colspan="2" style="background-color: #303030; color: #fff; text-align: center; padding-top: 20px;">
+					<h2>TOTAL: <%= number_to_currency(@sum, precision: 2) %></h2>
+				</td>
+			</tr>
+		</table>
 
-<p>
-  <strong>Notes:</strong>
-  <%= @preloaded_meal.notes %>
-</p>
+		
 
-<%= link_to 'Edit', edit_preloaded_meal_path(@preloaded_meal) %> |
-<%= link_to 'Back', preloaded_meals_path %>
+	</div>
+	<div class="cell small-12 medium-6">
+		<h1><%= @preloaded_meal.title %></h1>
+
+		<div class="method">
+		  <%= @preloaded_meal.method.html_safe %>
+		</div>
+		
+		<div class="notes">
+		  <strong>Notes:</strong>
+		  <%= @preloaded_meal.notes %>
+		</div>
+
+	</div>
+</div>
