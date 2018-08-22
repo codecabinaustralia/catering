@@ -186,7 +186,9 @@
                   </ul>
                   <hr />
                   <h3>Nutritional Panel</h3>
+                  <% if meal.preloaded_meal.nutritional_info.present? %>
                   <%= meal.preloaded_meal.nutritional_info.html_safe %>
+                  <% end %>
                 </div>
 
                   <%= form_for @patient_meal, :remote => true, :url => patient_patient_meal_path(@patient) do |f| %>
