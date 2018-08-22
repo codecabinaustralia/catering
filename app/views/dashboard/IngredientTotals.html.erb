@@ -117,13 +117,13 @@
 		<th>Item price</th>
 		<th>Total</th>
 	</thead>
-<% @preloaded_ingredients.group_by(&:ingredient_id).each do |preloaded_ingredient| %>
-	
+<% @preloaded_ingredients.each do |preloaded_ingredient| %>
+	<% @quantity = IngredientPreloadedMeal.where(ingredient_id: preloaded_ingredient.ingredient_id).sum(:quantity) %>
 	<tr>
 		<td><%= preloaded_ingredient.ingredient.title %></td>
-		<td><%= preloaded_ingredient.ingredient.unit_measure %></td>
+		<td><%= @quantity %> <%= preloaded_ingredient.ingredient.unit_measure %></td>
 		<td><%= preloaded_ingredient.ingredient.price %></td>
-		<td><strong><%= number_to_currency(preloaded_ingredient.ingredient.price.to_d) %></strong></td>
+		<td><strong><%= number_to_currency(@quantity.to_i * preloaded_ingredient.ingredient.price.to_d) %></strong></td>
 	</tr>
 <% end %>
 </table>
