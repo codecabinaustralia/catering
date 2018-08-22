@@ -10,7 +10,7 @@ class PreloadedMealsController < ApplicationController
   # GET /preloaded_meals
   # GET /preloaded_meals.json
   def index
-    @preloaded_meals = PreloadedMeal.all
+    @preloaded_meals = PreloadedMeal.all.order('created_at DESC')
   end
 
   # GET /preloaded_meals/1
