@@ -117,7 +117,7 @@
 		<th>Item price</th>
 		<th>Total</th>
 	</thead>
-<% @preloaded_ingredients.group("ingredient.id").each do |preloaded_ingredient| %>
+<% @preloaded_ingredients.group_by(&:ingredient_id).each do |preloaded_ingredient| %>
 	<% @quantity = IngredientPreloadedMeal.where(ingredient_id: preloaded_ingredient.ingredient_id).sum(:quantity) %>
 	<tr>
 		<td><%= preloaded_ingredient.ingredient.title %></td>
