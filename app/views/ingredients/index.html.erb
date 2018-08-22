@@ -1,6 +1,14 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Ingredients</h1>
+<div class="grid-x">
+  <div class="cell small-12 medium-6">
+    <h1>Ingredients</h1>
+  </div>
+  <div class="cell small-12 medium-6 text-right">
+    <%= link_to 'New Ingredient', new_ingredient_path, class: "button primary large" %>
+
+  </div>
+</div>
 
 <table>
   <thead>
@@ -30,4 +38,3 @@
 
 <br>
 
-<%= link_to 'New Ingredient', new_ingredient_path %>
