@@ -20,8 +20,6 @@
     <% @preloaded_meals.each do |preloaded_meal| %>
       <tr>
         <td><%= preloaded_meal.title %></td>
-        <td><%= preloaded_meal.ingredients %></td>
-        <td><%= preloaded_meal.nutritional_info %></td>
         <td><%= preloaded_meal.notes %></td>
         <td><%= link_to 'Show', preloaded_meal %></td>
         <td><%= link_to 'Edit', edit_preloaded_meal_path(preloaded_meal) %></td>
