@@ -1,7 +1,7 @@
 class PreloadedMeal < ApplicationRecord
-	has_many :meals
-	has_many :dietary_restrictions
-	has_many :ingredient_preloaded_meals
+	has_many :meals, :dependent => :delete_all
+	has_many :dietary_restrictions, :dependent => :delete_all
+	has_many :ingredient_preloaded_meals, :dependent => :delete_all
 	accepts_nested_attributes_for :ingredient_preloaded_meals
 
 	def self.csv(options = {})
