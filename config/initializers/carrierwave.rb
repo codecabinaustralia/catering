@@ -1,7 +1,12 @@
-Cloudinary.config do |config|
-  config.cloud_name = ENV['CLOUDAINRY_CLOUD']
-  config.api_key = ENV['API_KEY']
-  config.api_secret = ENV['API_SECRET']
-  config.secure = true
-  config.cdn_subdomain = true
+CarrierWave.configure do |config|
+  config.fog_provider = 'fog/aws'                        # required
+  config.fog_credentials = {
+    provider:              'AWS',                        # required
+    aws_access_key_id:     'AKIAJZ36L6RT5WVYFT5A',                        # required
+    aws_secret_access_key: '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',                        # required
+    region:                'us-west-2',                  # optional, defaults to 'us-east-1'
+ }
+  config.fog_directory  = 'salvation-army'                                   # required
+  config.fog_public     = false                                                 # optional, defaults to true
+  config.fog_attributes = { cache_control: "public, max-age=#{365.days.to_i}" } # optional, defaults to {}
 end
