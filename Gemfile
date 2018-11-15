@@ -26,6 +26,7 @@ gem 'chart-js-rails'
 gem 'jquery-minicolors-rails'
 gem "select2-rails"
 gem 'carrierwave'
+gem 'cloudinary'
 gem "fog-aws"
 gem 'seed_dump'
 gem 'prawn'
