@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   
+  get 'populate_data/initial_seed'
+
   get 'dashboard/IngredientTotals'
 
   resources :ingredients
